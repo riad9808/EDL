@@ -1,0 +1,13 @@
+<li class="list-group-item" style="margin : 10px "
+[ngClass]="{' list-group-item-success': Quantite() ,
+'list-group-item-danger': !Quantite()}"
+>
+
+  
+
+  <h4 >Plat : {{ name }} -- quantite : {{ quantite }}</h4>
+  
+  <button style="margin : 10px " class="btn btn-success" [disabled]="!possible()" (click)="comande()">Comander</button>
+
+
+</li>
