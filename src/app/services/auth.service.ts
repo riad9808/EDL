@@ -52,6 +52,8 @@ signInUser(email: string, password: string) {
   }
   signout(){
     this.authSubject.next(false);
+    this.isAuth=false;
+
   }
   verifySigning(email: string, password: string):boolean{
     if(email==="a@b.c"){

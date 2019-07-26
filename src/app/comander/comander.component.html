@@ -4,9 +4,9 @@
       <ul class="list-group">
 
         <app-plat  
-       
+        
                 *ngFor="let plat of mesplats; let i = index"
-                
+                [authstatus]="authStatus"
                  [id]="plat.id"
 
                  [name]="plat.name"

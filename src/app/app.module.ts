@@ -14,6 +14,7 @@ import { GerentComponent } from './acteur/gerent/gerent.component';
 import { CaissierComponent } from './acteur/caissier/caissier.component';
 import { ClientComponent } from './acteur/client/client.component';
 import { AuthguardService } from './services/authguard.service';
+import { AuthService } from './services/auth.service';
 const appRoutes: Routes = [
 
   { path: 'caissier', canActivate: [AuthguardService],component: CaissierComponent },
@@ -46,7 +47,7 @@ const appRoutes: Routes = [
 
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [GererplatService],
+  providers: [GererplatService,AuthService,AuthguardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

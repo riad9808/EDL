@@ -16,14 +16,17 @@ export class PlatComponent implements OnInit {
  @Input() name;
  @Input() quantite;
  @Input() index;
-  
-authStatus=this.authservice.isAuth;
-authSubsscription : Subscription;
+ @Input() authstatus; 
  ngOnInit() {
  
  
-  this.subscribe();
+  //this.subscribe();
  }
+ /*
+  
+authStatus=this.authservice.isAuth;
+authSubsscription : Subscription;
+
 
  subscribe(){
   
@@ -32,10 +35,11 @@ authSubsscription : Subscription;
         this.authStatus=authobj;
         
       }
-    )}
+    )}*/
   possible(){
-    this.subscribe();
-    return this.authStatus&&this.quantite>0;
+    console.log(this.authstatus);
+  //  this.subscribe();
+    return this.authstatus&&this.quantite>0;
   }
 
 
@@ -46,11 +50,14 @@ authSubsscription : Subscription;
     return this.quantite>0;
   }
   comande(){
-  
+
     this.quantite--;
     if(this.quantite<0){
       this.quantite=0;
     }
+    this.gererplatService.comander(this);
+    
+
   }
   
 }
