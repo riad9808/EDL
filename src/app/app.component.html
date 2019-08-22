@@ -1,12 +1,16 @@
 
-<div class="container">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-between">
+
+
+
+
+<div class="container" [ngStyle]="{ 'background-color': '#F8F8F8	'}">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-between "  >
    
-    <a class="navbar-brand" href="#">Restautrant</a>
+    <a class="navbar-brand " routerLink="">Restautrant</a>
     <div class="collapse navbar-collapse container-fluid" id="navbarSupportedContent">
      
       <ul class="navbar-nav mr-auto">
-        <!--
+       
         <li class="nav-item" >
           <a *ngIf="type==='local'" class="nav-link" routerLink="Menu">plats</a>
         </li>
@@ -21,18 +25,18 @@
           <a *ngIf="type==='serveur'" class="nav-link" routerLink="add">suivre les comandes</a>
         </li>
         <li class="nav-item" >
-          <a *ngIf="type==='gerent'" class="nav-link" routerLink="users">comande en ligne</a>
+          <a *ngIf="type==='gerent'" class="nav-link" routerLink="gerent/ajoutproduit">ajouter un produit</a>
         </li>
         <li class="nav-item" >
-          <a *ngIf="type==='gerent'" class="nav-link" routerLink="users">gerer les plats</a>
+          <a *ngIf="type==='gerent'" class="nav-link" routerLink="gerent/ajoutcompte">ajouter un compte</a>
         </li>
-      -->
+        
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
         <li class="nav-item" >
-          <a class="nav-link " *ngIf="!authStatus" routerLink="auth">Authentification</a>
-          <a class="nav-link" *ngIf="authStatus" (click)="onSignOut()" >Se déconnecter</a>
+          <a class="navbar-brand" *ngIf="!authStatus" routerLink="auth">Authentification</a>
+          <a class="navbar-brand " *ngIf="authStatus" (click)="onSignOut()" >Se déconnecter</a>
         </li>
         
       </ul>
@@ -41,10 +45,9 @@
   </nav>
   
  
-
     
       
-      <router-outlet>
+      <router-outlet >
       </router-outlet>
 
    

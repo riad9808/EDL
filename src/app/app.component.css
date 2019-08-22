@@ -1,0 +1,11 @@
+@import '../../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+#nav{
+    background-repeat: no-repeat;
+}
+.example-container {
+    width: 400px;
+    height: 200px;
+    margin: 10px;
+    border: 1px solid #555;
+  }

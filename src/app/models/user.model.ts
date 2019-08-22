@@ -6,10 +6,22 @@ export enum UserType{
 }
 
 export class user{
-    id:any;
+    username;
+    fullname;
+    telephone;
+    password;
+    
+
     type :any;
-    constructor(ide : any,typee : any){
-        this.id=ide;
-        this.type=typee
+    
+    
+    constructor(username,fullname,telephone,password,type){
+        
+        this.username=username;
+        this.fullname=fullname;
+
+        this.telephone=telephone;
+        this.password=password;
+        this.type=type;
     }
 }

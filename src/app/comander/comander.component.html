@@ -1,19 +1,19 @@
 
-      <h2 style="margin : 10px ">Menu</h2>
+      <h2 class="" style="margin : 10px  ">Menu  </h2>
 
-      <ul class="list-group">
+      <ul class="list-group ">
 
         <app-plat  
         
                 *ngFor="let plat of mesplats; let i = index"
-                [authstatus]="authStatus"
+                
                  [id]="plat.id"
-
-                 [name]="plat.name"
-
+                  [type]="type"
+                 [name]="plat.categorie"
+                  [type]="type"
                  [index]="i" 
-
-                 [quantite]="plat.quantite"></app-plat>
+                  [authStatus]="authStatus"
+                 [quantite]="plat.qtstock"></app-plat>
 
       </ul>
      

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { Local } from 'protractor/built/driverProviders';
 import { user , UserType } from '../models/user.model';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
 @Injectable({
@@ -9,60 +10,41 @@ import { user , UserType } from '../models/user.model';
 })
 export class AuthService {
   public type="serveur";
-  constructor() { }
-  typeSubject = new Subject<string>();
-  authSubject = new Subject<boolean>();
+  constructor(private _http:HttpClient) { }
+  usertype='local';
   isAuth=false;
-  
-  
-  
-
-signInUser(email: string, password: string) {
-  
-  return new Promise(
-
-    (resolve, reject) => {
-      
-        if(this.verifySigning(email,password)){
-         // this.typeSubject.next("gerent"); 
-         this.authSubject.next(true);
-          this.isAuth=true;
-          
-          resolve();
-        }
-        else{
-          resolve();
-        }
-
-          
-
-       
-
-        (error) => {
-
-          reject(error);
-
-        }
-
-      
-
-    }
-
-  );
+  usertypesubject=new Subject<string>();
+  authsubject=new Subject<boolean>();
+  emitAuthstate(){
+    this.authsubject.next(this.isAuth);
   }
+  emitusertypesubject(){
+    this.usertypesubject.next(this.usertype);
+  }
+ 
   signout(){
-    this.authSubject.next(false);
+    this.authsubject.next(false);
     this.isAuth=false;
+    this.usertype='local';
+    this.usertypesubject.next('local');
+    localStorage.setItem('logged', 'false');
+        localStorage.setItem('type', 'local');
 
   }
-  verifySigning(email: string, password: string):boolean{
-    if(email==="a@b.c"){
-      this.typeSubject.next("serveur"); 
+  signInUser(username: string, password: string):Observable<string>{
+
+    let u=new user(username,'','',password,'');
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+      })
+    };
+      return this._http.post<string>('http://127.0.0.1:8000/api/signin',u,httpOptions);
+   
+     //this.typeSubject.next("gerent"); 
      // localStorage.setItem('userType',UserType.serveur.toString());
-      localStorage.setItem('userId',email);
-    return true;
-    }else
-    return false;
+    
   }
   
 }

@@ -4,6 +4,8 @@ import { GererplatService } from '../services/gererplat.service';
 import { AuthService } from '../services/auth.service';
 import { AppComponent } from '../app.component';
 import { Subscription } from 'rxjs';
+import { type } from 'os';
+import { resolve } from 'path';
 
 @Component({
   selector: 'app-plat',
@@ -12,40 +14,34 @@ import { Subscription } from 'rxjs';
 })
 export class PlatComponent implements OnInit {
  
- @Input() id;
- @Input() name;
- @Input() quantite;
- @Input() index;
- @Input() authstatus; 
+
+  authSubsscription: Subscription;
+  typesubscription:Subscription;
+  constructor(private gererplatService : GererplatService,
+    private authService : AuthService
+) { }
+addedqte=0;
+@Input() id;
+@Input() name;
+@Input() quantite ;
+@Input() index;
+@Input() authStatus; 
+@Input() type;
+msg;
+total=this.addedqte + this.quantite;
  ngOnInit() {
  
  
-  //this.subscribe();
  }
- /*
-  
-authStatus=this.authservice.isAuth;
-authSubsscription : Subscription;
 
-
- subscribe(){
-  
-    this.authSubsscription=this.authservice.authSubject.subscribe(
-      (authobj : boolean)=>{
-        this.authStatus=authobj;
-        
-      }
-    )}*/
   possible(){
-    console.log(this.authstatus);
-  //  this.subscribe();
-    return this.authstatus&&this.quantite>0;
+    //console.log(this.authStatus);
+ 
+    return this.authStatus&&this.quantite>0;
   }
 
 
-  constructor(private gererplatService : GererplatService,
-              private authservice : AuthService
-    ) { }
+  
   Quantite(){
     return this.quantite>0;
   }
@@ -55,9 +51,25 @@ authSubsscription : Subscription;
     if(this.quantite<0){
       this.quantite=0;
     }
-    this.gererplatService.comander(this);
+    //this.gererplatService.comander(this);
     
 
+  }
+  approvisionner(){
+    this.gererplatService.approvisionner(this.id,this.addedqte).subscribe(arg => this.msg = arg);
+    this.gererplatService.initplat();
+    this.gererplatService.generatePlat();
+  }
+  supprimer(){
+    let a = new Promise((resolve)=>{
+      this.gererplatService.supprimer(this.id).subscribe(arg => this.msg = arg);
+      resolve();
+    })
+    a.then(()=>{
+      this.gererplatService.initplat();
+      this.gererplatService.generatePlat();
+    });
+    
   }
   
 }

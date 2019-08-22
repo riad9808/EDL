@@ -13,32 +13,37 @@ export class AppComponent implements OnInit , OnDestroy {
   
   
   ngOnDestroy(): void {
-    throw new Error("Method not implemented.");
+    this.authSubsscription.unsubscribe();
+    this.typesubscription.unsubscribe();
   }
-  authSubsscription :Subscription;
-  authStatus=this.authService.isAuth;
-  typesubscription : Subscription;
-  title = 'EDL';
-  type ="local";
+ 
+  
   constructor(private gererplatService : GererplatService,
               private router: Router,
               private authService : AuthService
-      ) { }
-  mesplats=this.gererplatService.plats;
+      ) {       }
+
+      authSubsscription :Subscription;
+      authStatus;
+      typesubscription : Subscription;
+      title = 'EDL';
+      type ="local";
   ngOnInit() {
-    this.typesubscription=this.authService.typeSubject.subscribe(
-      (typee :string)=>{
-        this.type=typee;
-      }
-    );
-    this.authSubsscription=this.authService.authSubject.subscribe(
-      (authobj : boolean)=>{
-        this.authStatus=authobj;
-      }
-    );
+    this.authService.signout();
+   this.authSubsscription=this.authService.authsubject.subscribe((auths)=>{
+     this.authStatus=auths;
+   });
+   this.typesubscription=this.authService.usertypesubject.subscribe((typu)=>{
+    this.type=typu;
+  });
+   
+    this.gererplatService.initplat();
+   
   }
   onSignOut(){
     this.authService.signout();
+
     this.router.navigate(['']);
   }
+  
 }

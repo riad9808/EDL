@@ -1,0 +1,97 @@
+<div class="row">
+  <div class="col-sm-3 col-sm-offset-2  " style="margin : 10px ;align-self: center;"></div>
+  <div class="col-sm-6 col-sm-offset-2  " style="margin : 10px ">
+  <mat-card class="example-card" style="margin : 10px">
+      <mat-card-header>
+        
+        <mat-card-title>Ajouter un compte</mat-card-title>
+       
+      </mat-card-header>
+      
+      <mat-card-content>
+          <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+              <h6>nom d'utilisateur</h6>
+
+              <div class="form-group">
+                  <mat-form-field  style="width: 100%;">
+                    <mat-label>nom d'utilisateur</mat-label>
+
+                      <input matInput placeholder="nom complet" 
+                      id="nom"
+                      formControlName="username">
+                     
+                      
+                    </mat-form-field>
+              </div>
+
+              <h6>nom complet</h6>
+
+              <div class="form-group">
+                  <mat-form-field  style="width: 100%;">
+                    <mat-label>nom complet</mat-label>
+
+                      <input matInput placeholder="nom complet" 
+                      id="fullname"
+                      formControlName="fullname">
+                     
+                      
+                    </mat-form-field>
+              </div>
+              <h6>mot de passe</h6>
+
+              <div class="form-group">
+                  <mat-form-field style="width: 100%;">
+                    <mat-label>mot de passe </mat-label>
+
+                      <input matInput placeholder="mot de passe" 
+                      id="password"
+                      formControlName="password" type="password">
+                     
+                      
+                    </mat-form-field>
+  
+                
+               
+              </div> 
+              <h6>telephone</h6>
+              <div class="form-group">
+                <mat-form-field style="width: 100%;">
+                    <mat-label>telephone</mat-label>
+                    <input matInput placeholder="telephone" 
+                    id="telephone"
+                    formControlName="telephone" type="telephone">
+                   
+                    
+                  </mat-form-field>
+
+              
+             
+            </div> 
+              <div class="form-group">
+                <h6>type d'utilisateur</h6>
+                    <mat-form-field  style="width: 100%;">
+                          <mat-label>type</mat-label>
+                            <mat-select formControlName="type">
+                                <mat-option [value]="typeselect.label" *ngFor="let typeselect of typeoption">
+                                  {{typeselect.label}}
+                                </mat-option>
+                            </mat-select>
+                    </mat-form-field>
+             
+               
+
+              
+             
+            </div>
+              <button mat-button style="margin-left: 37%"
+                    type="submit"
+                    [disabled]="userForm.invalid">Ajouter</button>
+            </form>
+            <p class="text-danger">{{ errorMessage }}</p>
+      </mat-card-content>
+      <mat-card-actions>
+          
+      </mat-card-actions> 
+    </mat-card>
+  </div>
+  </div>

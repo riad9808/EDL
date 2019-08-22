@@ -15,10 +15,26 @@ import { CaissierComponent } from './acteur/caissier/caissier.component';
 import { ClientComponent } from './acteur/client/client.component';
 import { AuthguardService } from './services/authguard.service';
 import { AuthService } from './services/auth.service';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatButtonModule} from '@angular/material/button';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatCardModule } from '@angular/material/card';
+import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
+import {MatMenu, MatMenuModule} from '@angular/material/menu';
+import { AjoutCompteComponent } from './acteur/gerent/ajout-compte/ajout-compte.component';
+import { AjoutcompteService } from './services/ajoutcompte.service';
+import { HttpClientModule } from '@angular/common/http';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import { AjoutproduitComponent } from './acteur/gerent/ajoutproduit/ajoutproduit.component'
+
 const appRoutes: Routes = [
 
   { path: 'caissier', canActivate: [AuthguardService],component: CaissierComponent },
   { path: 'serveur', canActivate: [AuthguardService],component: ServeurComponent },
+  { path: 'gerent', canActivate: [AuthguardService],component: GerentComponent },
+  { path: 'gerent/ajoutcompte', canActivate: [AuthguardService],component: AjoutCompteComponent },
+  { path: 'gerent/ajoutproduit', canActivate: [AuthguardService],component: AjoutproduitComponent },
 
   { path: 'plats', component: ComanderComponent },
   { path: 'auth', component: AuthComponent },
@@ -37,17 +53,28 @@ const appRoutes: Routes = [
     ServeurComponent,
     GerentComponent,
     CaissierComponent,
-    ClientComponent
+    ClientComponent,
+    AjoutCompteComponent,
+    AjoutproduitComponent
   ],
   imports: [
+    HttpClientModule,
     ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-
-    RouterModule.forRoot(appRoutes)
+    MatCardModule,
+    MatButtonModule, 
+    MatCheckboxModule,
+    RouterModule.forRoot(appRoutes),
+     BrowserAnimationsModule,
+     MatInputModule,
+     MatMenuModule,
+     MatSelectModule,
+     MatSidenavModule
   ],
-  providers: [GererplatService,AuthService,AuthguardService],
-  bootstrap: [AppComponent]
+  providers: [GererplatService,AuthService,AuthguardService,AjoutcompteService],
+  bootstrap: [AppComponent],
+  exports: [MatButtonModule, MatCheckboxModule,MatCardModule]
 })
 export class AppModule { }
