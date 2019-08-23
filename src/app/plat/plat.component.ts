@@ -6,6 +6,7 @@ import { AppComponent } from '../app.component';
 import { Subscription } from 'rxjs';
 import { type } from 'os';
 import { resolve } from 'path';
+import { GerercommandeService } from '../services/gerercommande.service';
 
 @Component({
   selector: 'app-plat',
@@ -18,7 +19,8 @@ export class PlatComponent implements OnInit {
   authSubsscription: Subscription;
   typesubscription:Subscription;
   constructor(private gererplatService : GererplatService,
-    private authService : AuthService
+    private authService : AuthService,
+    private gerecommande:GerercommandeService
 ) { }
 addedqte=0;
 @Input() id;
@@ -28,6 +30,7 @@ addedqte=0;
 @Input() authStatus; 
 @Input() type;
 msg;
+qtcomande;
 total=this.addedqte + this.quantite;
  ngOnInit() {
  
@@ -36,8 +39,8 @@ total=this.addedqte + this.quantite;
 
   possible(){
     //console.log(this.authStatus);
- 
-    return this.authStatus&&this.quantite>0;
+      return this.gerecommande.possible
+   // return this.authStatus&&this.quantite>0;
   }
 
 
@@ -47,12 +50,14 @@ total=this.addedqte + this.quantite;
   }
   comande(){
 
+    this.gerecommande.ajoutsouscomande(this.id,this.qtcomande);
+    /*
     this.quantite--;
     if(this.quantite<0){
       this.quantite=0;
     }
     //this.gererplatService.comander(this);
-    
+    */
 
   }
   approvisionner(){

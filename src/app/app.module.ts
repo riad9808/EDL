@@ -27,13 +27,15 @@ import { AjoutcompteService } from './services/ajoutcompte.service';
 import { HttpClientModule } from '@angular/common/http';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { AjoutproduitComponent } from './acteur/gerent/ajoutproduit/ajoutproduit.component'
+import { GerercommandeService } from './services/gerercommande.service';
 
 const appRoutes: Routes = [
 
   { path: 'caissier', canActivate: [AuthguardService],component: CaissierComponent },
   { path: 'serveur', canActivate: [AuthguardService],component: ServeurComponent },
   { path: 'gerent', canActivate: [AuthguardService],component: GerentComponent },
-  { path: 'gerent/ajoutcompte', canActivate: [AuthguardService],component: AjoutCompteComponent },
+  { path: 'gerent/ajoutcompte', canActivate: [AuthguardService],
+    component: AjoutCompteComponent },
   { path: 'gerent/ajoutproduit', canActivate: [AuthguardService],component: AjoutproduitComponent },
 
   { path: 'plats', component: ComanderComponent },
@@ -73,7 +75,7 @@ const appRoutes: Routes = [
      MatSelectModule,
      MatSidenavModule
   ],
-  providers: [GererplatService,AuthService,AuthguardService,AjoutcompteService],
+  providers: [GererplatService,AuthService,AuthguardService,AjoutcompteService,GerercommandeService],
   bootstrap: [AppComponent],
   exports: [MatButtonModule, MatCheckboxModule,MatCardModule]
 })

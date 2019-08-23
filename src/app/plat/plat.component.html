@@ -11,13 +11,21 @@
 
   <h4 >Plat :  {{ name }}-- quantite : {{ quantite + addedqte }}</h4>
   
-  <button style="margin : 10px " class="btn btn-dark" [disabled]="!possible()" (click)="comande()">Comander</button>
+  
   <div *ngIf="type==='gerent'">
       <input type="number" class="form-control" [(ngModel)]="addedqte">
     <button  class="btn btn-dark" (click)="approvisionner()">aprovisionner</button>
     <button  class="btn btn-dark" (click)="supprimer()">supprimer</button>
 
   </div>
+
+  <div *ngIf="type==='serveur'">
+    <input type="number" class="form-control" [disabled]="!possible()" [(ngModel)]="qtcomande">
+  
+
+    <button style="margin : 10px " class="btn btn-dark" [disabled]="!possible()" (click)="comande()">Comander</button>
+
+</div>
  
   {{msg}}
 </li>

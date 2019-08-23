@@ -46,13 +46,20 @@ export class AuthComponent implements OnInit {
           if(u=='erreur'){
             reject();
           }else{
-            this.type=u;
-            this.authService.isAuth=true;
-            this.authService.emitAuthstate();
-            this.authService.usertype=this.type;
-            this.authService.emitusertypesubject();
-            localStorage.setItem('type', this.type);
-            resolve();
+            if(u==null){
+              reject();
+
+            }else{
+              this.type=u;
+              this.authService.isAuth=true;
+              this.authService.emitAuthstate();
+              this.authService.usertype=this.type;
+              this.authService.emitusertypesubject();
+              localStorage.setItem('type', this.type);
+              localStorage.setItem('user',username);
+              resolve();
+            }
+           
 
           }
           

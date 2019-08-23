@@ -1,1 +1,22 @@
+<h6>numero de table</h6>
+<form [formGroup]="commandeForm" (ngSubmit)="onSubmit()">
+<div class="form-group">
+    <mat-form-field  style="width: 100%;">
+      <mat-label>entrez le numero de table pour une nouvelle commande</mat-label>
+
+        <input matInput placeholder="numero de table" 
+        id="num"
+        type="number"
+        formControlName="num_table">
+       
+        
+      </mat-form-field>
+</div>
+       
+
+        <button mat-button style="margin-left: 37%"
+        type="submit"
+        [disabled]="commandeForm.invalid">nouvelle commande</button>
+</form>
+<p class="text-danger">{{ errorMessage }}</p>   
 <app-comander></app-comander>
