@@ -1,0 +1,35 @@
+
+<mat-expansion-panel style="margin-top: 20px">
+
+<mat-expansion-panel-header>
+  <mat-panel-title>
+    commande numero :  {{ id }}
+     --   numero de table : {{ numtable }} --
+     <div *ngIf="type==='caissier'">
+       à payer  {{prix}}
+     </div>
+
+    </mat-panel-title>
+  <mat-panel-description>
+      commande passé par  : {{ serveur }}
+      <div *ngIf="type==='cuisinier'">
+      <button style="margin-left: 300px" mat-raised-button color="primary" *ngIf="val==true" (click)="valider()">valider</button>
+      <button style="margin-left: 300px" mat-raised-button color="accent" *ngIf="val==false" (click)="prete()">prete</button>
+
+      <button style="margin-left: 30px" mat-raised-button color="warn" (click)="annuler()">annuler</button>
+    </div>
+    <div *ngIf="type==='caissier'">
+        <button style="margin-left: 300px" mat-raised-button color="primary"  (click)="prete()">payer</button>
+    </div>
+
+  </mat-panel-description>
+</mat-expansion-panel-header>
+
+  <ul>
+    <li *ngFor="let scom of souscom; let i = index">
+      à servire {{scom.produit[0].categorie}} : {{scom.produit[0].extra}} &nbsp; quantité {{scom.qte}} -- prix unitaire {{scom.produit[0].prix}}
+    </li>
+
+  </ul>
+
+</mat-expansion-panel>

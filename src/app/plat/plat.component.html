@@ -20,10 +20,11 @@
   </div>
 
   <div *ngIf="type==='serveur'">
-    <input type="number" class="form-control" [disabled]="!possible()" [(ngModel)]="qtcomande">
+    <input type="number" class="form-control" [disabled]="!possible1()" [(ngModel)]="qtcomande">
   
 
     <button style="margin : 10px " class="btn btn-dark" [disabled]="!possible()" (click)="comande()">Comander</button>
+    <button style="margin : 10px " class="btn btn-dark" [disabled]="!possible2()" (click)="modifier()">modifier</button>
 
 </div>
  

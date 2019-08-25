@@ -1,19 +1,23 @@
-<div class="row">
-  <div class="col-sm-12 col-sm-offset-2">
-    <h2>Encaisser</h2>
-    <form [formGroup]="payerForm" (ngSubmit)="onSubmit()">
-      <div class="form-group">
-        <label for="montant">montant</label>
-        <input type="text"
-               id="montant"
-               class="form-control"
-               formControlName="montant">
-      </div>
-      
-      <button class="btn btn-primary"
-              type="submit"
-              [disabled]="payerForm.invalid">valider</button>
-    </form>
-    <p class="text-danger">{{ errorMessage }}</p>
-  </div>
-</div>
+
+
+<mat-accordion>
+
+
+
+
+
+    <app-commande
+
+            *ngFor="let com of lescoms; let i = index"
+              [a]="com"
+             [id]="com.id"
+              [numtable]="com.num_table"
+              [prix]="com.prix"
+             [souscom]="com.souscom"
+              [serveur]="com.serveur"
+             [index]="i"
+              [type]="type"
+             ></app-commande>
+
+
+</mat-accordion>

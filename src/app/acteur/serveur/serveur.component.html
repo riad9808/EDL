@@ -16,7 +16,12 @@
 
         <button mat-button style="margin-left: 37%"
         type="submit"
-        [disabled]="commandeForm.invalid">nouvelle commande</button>
+        [disabled]="commandeForm.invalid" >nouvelle commande</button>
+      
+        
+
 </form>
+<button mat-button style="margin-left: 37%"  [disabled]="!possible()" (click)="valider()">valider la commande</button>
+
 <p class="text-danger">{{ errorMessage }}</p>   
 <app-comander></app-comander>

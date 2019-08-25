@@ -14,7 +14,7 @@ import { GerercommandeService } from '../services/gerercommande.service';
   styleUrls: ['./plat.component.css']
 })
 export class PlatComponent implements OnInit {
- 
+
 
   authSubsscription: Subscription;
   typesubscription:Subscription;
@@ -27,30 +27,48 @@ addedqte=0;
 @Input() name;
 @Input() quantite ;
 @Input() index;
-@Input() authStatus; 
+@Input() authStatus;
 @Input() type;
 msg;
-qtcomande;
+qtcomande=0;
 total=this.addedqte + this.quantite;
  ngOnInit() {
- 
- 
- }
 
+
+ }
+ p=true;
+ pmod=false;
+mysous;
   possible(){
-    //console.log(this.authStatus);
-      return this.gerecommande.possible
-   // return this.authStatus&&this.quantite>0;
+
+      return this.gerecommande.possible&&(this.qtcomande<=this.quantite)&&this.p;
+
+  }
+  possible1(){
+
+      return this.gerecommande.possible;
+
+  }
+  possible2(){
+
+    return this.gerecommande.possible&&this.pmod;
+
+}
+
+  modifier(){
+    this.qtcomande=0;
+    this.p=true;
+    this.gerecommande.suppsous(this.mysous);
   }
 
-
-  
   Quantite(){
     return this.quantite>0;
   }
   comande(){
+    this.p=false;
+    this.pmod=true;
 
-    this.gerecommande.ajoutsouscomande(this.id,this.qtcomande);
+    this.mysous= this.gerecommande.ajoutsouscomande(this.id,this.qtcomande);
     /*
     this.quantite--;
     if(this.quantite<0){
@@ -61,9 +79,8 @@ total=this.addedqte + this.quantite;
 
   }
   approvisionner(){
-    this.gererplatService.approvisionner(this.id,this.addedqte).subscribe(arg => this.msg = arg);
-    this.gererplatService.initplat();
-    this.gererplatService.generatePlat();
+    this.gererplatService.approvisionner(this.id,this.addedqte).then(arg => this.msg = arg);
+
   }
   supprimer(){
     let a = new Promise((resolve)=>{
@@ -71,10 +88,9 @@ total=this.addedqte + this.quantite;
       resolve();
     })
     a.then(()=>{
-      this.gererplatService.initplat();
-      this.gererplatService.generatePlat();
+     this.gererplatService.getplat();
     });
-    
+
   }
-  
+
 }

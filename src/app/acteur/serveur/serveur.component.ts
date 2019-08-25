@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GerercommandeService } from 'src/app/services/gerercommande.service';
 import { Validators, FormBuilder, NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-serveur',
@@ -10,7 +11,9 @@ import { Validators, FormBuilder, NgForm } from '@angular/forms';
 export class ServeurComponent implements OnInit {
 
   constructor(private gerercommande : GerercommandeService,
-    private formBuilder: FormBuilder) { }
+    private formBuilder: FormBuilder,
+    private router:Router
+    ) { }
 numtable;
 commandeForm;
   ngOnInit() {
@@ -30,6 +33,25 @@ onSubmit(commandeForm:NgForm){
       this.commandeForm.get('num_table').value);
       
 
+  }
+  possible(){
+    //console.log(this.authStatus);
+      return this.gerercommande.possible
+   // return this.authStatus&&this.quantite>0;
+  }
+  valider(){
+    this.gerercommande.valider().subscribe((res)=>{
+      if(res==='succes'){
+        
+        alert('succes');
+        this.router.navigate(['']);
+
+      }else{
+        alert('erreur');
+        this.router.navigate(['']);
+
+      }
+    })
   }
 
 }

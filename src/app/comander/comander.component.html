@@ -3,17 +3,17 @@
 
       <ul class="list-group ">
 
-        <app-plat  
-        
-                *ngFor="let plat of mesplats; let i = index"
-                
+        <app-plat
+
+                *ngFor="let plat of produits; let i = index"
+
                  [id]="plat.id"
                   [type]="type"
                  [name]="plat.categorie"
                   [type]="type"
-                 [index]="i" 
+                 [index]="i"
                   [authStatus]="authStatus"
                  [quantite]="plat.qtstock"></app-plat>
 
       </ul>
-     
+

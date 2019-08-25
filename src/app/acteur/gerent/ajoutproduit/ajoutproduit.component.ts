@@ -20,7 +20,7 @@ b:boolean;
   typeoption = [
     {id:1,label : 'boisson'},
     {id:2,label : 'plat'}
-    
+
   ]
   ngOnInit() {
     this.initForm();
@@ -33,7 +33,7 @@ b:boolean;
       taille: ['', Validators.required, ],
       prix: ['', Validators.required],
       qtstock: ['', Validators.required],
-      
+
     });
 }
 onSubmit(produitForm:NgForm){
@@ -44,18 +44,20 @@ onSubmit(produitForm:NgForm){
     this.produitForm.get('prix').value,
     this.produitForm.get('qtstock').value
   );
-  
+
 
   let a=new Promise((resolve,reject)=>{
     this.gererplatService.ajoutproduit(Produit).subscribe((b:boolean)=>{
-    this.gererplatService.initplat();
-    this.gererplatService.generatePlat();  
+   // this.gererplatService.initplat();
+    //this.gererplatService.generatePlat();
+    this.gererplatService.getplat();
+
       this.b=b;
       resolve();
     })
   })
-   
-    
+
+
     a.then(()=>{
       if(this.b){
       alert("succes");

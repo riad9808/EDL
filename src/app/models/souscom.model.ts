@@ -1,5 +1,5 @@
 export class souscom{
-    prod;
+    public prod;
     qte;
     
     prix;

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject, Subscription, Observable } from 'rxjs';
+import { Subject, Subscription, Observable, BehaviorSubject } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { resolve } from 'dns';
 import { produit } from '../models/produit.model';
@@ -9,48 +9,59 @@ import { produit } from '../models/produit.model';
   providedIn: 'root'
 })
 export class GererplatService  {
-  public  lesplats=[];
-   
+  public  produits=[];
+  private datasub = new BehaviorSubject(undefined);
+  published =this.datasub.asObservable();
 
-platSubject=new Subject<any>();
+   produitSubject:Subject<produit[]>=new Subject<produit[]>();
+  emitproduits(){
 
+    this.datasub.next(this.produits);
+   }
 
   constructor(private _http:HttpClient ) {
-    
-   
+
+
 
    }
+   /*
    initplat(){
-     let a=new Promise((resolve)=>{
+     return new Promise((resolve)=>{
       this.getplat().subscribe(data=>
-        this.lesplats=data
+        this.produits=data
       );
-      this.generatePlat();
+      this.emitproduits();
       resolve();
      });
-      
-      
-    a.then(()=>console.log(this.lesplats));
 
-  }
+
+
+
+  }*/
 getplat(){
+
   const httpOptions = {
     headers: new HttpHeaders({
       'Content-Type':  'application/json'
     })
   };
-  
-  return this._http.get<[]>('http://127.0.0.1:8000/api/produit',httpOptions);
+
+  return new Promise((resolve)=>{
+    this._http.get<produit[]>('http://127.0.0.1:8000/api/produit',httpOptions).subscribe((data)=>{
+      this.produits=data;
+      this.emitproduits();
+    });
+
+    resolve();
+  });
+
 
 }
-   generatePlat(){
-     
-    this.platSubject.next(this.lesplats.slice());
-   }
- 
+
+
 approvisionner(id,addedqte){
   let x;
-  let a = new Promise((resolve)=>{
+  return new Promise((resolve)=>{
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json'
@@ -60,15 +71,17 @@ approvisionner(id,addedqte){
       "id":id,
       "addedqte":addedqte
     };
-    x= this._http.post<boolean>('http://127.0.0.1:8000/api/approvisionner',col,httpOptions);
-    this.generatePlat();
-    resolve();
-    
+     this._http.post<boolean>('http://127.0.0.1:8000/api/approvisionner',col,httpOptions).subscribe((data)=>{
+      x=data;
+    });
+    this.getplat();
+    resolve(x);
+
   });
- 
-  return x;
-}  
- 
+
+
+}
+
 supprimer(id){
   let x;
   let a = new Promise((resolve)=>{
@@ -79,14 +92,14 @@ supprimer(id){
     };
     let col={
       "id":id
-      
+
     };
     x= this._http.post<boolean>('http://127.0.0.1:8000/api/delete',col,httpOptions);
-    this.generatePlat();
+    this.getplat();
     resolve();
 });
 return x
- 
+
 }
 
 ajoutproduit(pr):Observable<boolean>{

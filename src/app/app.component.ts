@@ -10,14 +10,14 @@ import { AuthService } from './services/auth.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit , OnDestroy {
-  
-  
+
+
   ngOnDestroy(): void {
     this.authSubsscription.unsubscribe();
     this.typesubscription.unsubscribe();
   }
- 
-  
+
+
   constructor(private gererplatService : GererplatService,
               private router: Router,
               private authService : AuthService
@@ -36,14 +36,14 @@ export class AppComponent implements OnInit , OnDestroy {
    this.typesubscription=this.authService.usertypesubject.subscribe((typu)=>{
     this.type=typu;
   });
-   
-    this.gererplatService.initplat();
-   
+
+    this.gererplatService.getplat();
+
   }
   onSignOut(){
     this.authService.signout();
 
     this.router.navigate(['']);
   }
-  
+
 }

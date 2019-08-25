@@ -28,12 +28,17 @@ import { HttpClientModule } from '@angular/common/http';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { AjoutproduitComponent } from './acteur/gerent/ajoutproduit/ajoutproduit.component'
 import { GerercommandeService } from './services/gerercommande.service';
+import { CuisinierComponent } from './acteur/cuisinier/cuisinier.component';
+import { CommandeComponent } from './acteur/cuisinier/commande/commande.component';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 const appRoutes: Routes = [
 
   { path: 'caissier', canActivate: [AuthguardService],component: CaissierComponent },
   { path: 'serveur', canActivate: [AuthguardService],component: ServeurComponent },
   { path: 'gerent', canActivate: [AuthguardService],component: GerentComponent },
+  { path: 'cuisinier', canActivate: [AuthguardService],component: CuisinierComponent },
+
   { path: 'gerent/ajoutcompte', canActivate: [AuthguardService],
     component: AjoutCompteComponent },
   { path: 'gerent/ajoutproduit', canActivate: [AuthguardService],component: AjoutproduitComponent },
@@ -57,7 +62,9 @@ const appRoutes: Routes = [
     CaissierComponent,
     ClientComponent,
     AjoutCompteComponent,
-    AjoutproduitComponent
+    AjoutproduitComponent,
+    CuisinierComponent,
+    CommandeComponent
   ],
   imports: [
     HttpClientModule,
@@ -66,14 +73,15 @@ const appRoutes: Routes = [
     AppRoutingModule,
     FormsModule,
     MatCardModule,
-    MatButtonModule, 
+    MatButtonModule,
     MatCheckboxModule,
     RouterModule.forRoot(appRoutes),
      BrowserAnimationsModule,
      MatInputModule,
      MatMenuModule,
      MatSelectModule,
-     MatSidenavModule
+     MatSidenavModule,
+     MatExpansionModule
   ],
   providers: [GererplatService,AuthService,AuthguardService,AjoutcompteService,GerercommandeService],
   bootstrap: [AppComponent],

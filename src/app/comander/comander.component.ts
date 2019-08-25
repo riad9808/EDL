@@ -4,6 +4,7 @@ import { AuthService } from '../services/auth.service';
 import { Subscription, Observable } from 'rxjs';
 
 import { resolve, reject } from 'q';
+import { produit } from '../models/produit.model';
 
 @Component({
   selector: 'app-comander',
@@ -11,22 +12,33 @@ import { resolve, reject } from 'q';
   styleUrls: ['./comander.component.css']
 })
 export class ComanderComponent implements OnInit  , OnDestroy{
-  
+
   constructor(private gererplatService : GererplatService,
     private authService : AuthService) { }
 
 
   typesubscription: Subscription;
-  type: string=localStorage.getItem('type'); 
+  type: string=localStorage.getItem('type');
   public mesplats;
-  mesplatSubscription :Subscription;
+  mesproduitsubscription :Subscription;
   authStatus:boolean;
+  produits :produit[];
 
-  platsub$:Observable<Array<any>>;
 
   authSubsscription:Subscription;
   ngOnInit() {
-  
+
+      this.gererplatService.getplat().then(()=>{
+
+          this.mesproduitsubscription=this.gererplatService.published.subscribe((data)=>{
+            this.produits=data;
+          })
+
+
+
+    })
+
+
 
   this.authSubsscription=this.authService.authsubject.subscribe((auths)=>{
     this.authStatus=auths;
@@ -34,30 +46,22 @@ export class ComanderComponent implements OnInit  , OnDestroy{
   this.typesubscription=this.authService.usertypesubject.subscribe((typu)=>{
     this.type=typu;
   });
-
+/*
     this.gererplatService.getplat().subscribe((data)=>{
       this.mesplats=data;
     })
     this.gererplatService.generatePlat();
-    
-  
-   
+*/
+
+
     console.log('type'+this.type);
   }
- 
-  subscribemesplats (){
-    this.mesplatSubscription=this.gererplatService.platSubject.subscribe(
-      (_platliste)=>{
-        this.mesplats=_platliste;
-        
 
-      }
-      );
-    
-  }
+
   ngOnDestroy(): void {
     this.authSubsscription.unsubscribe();
     this.typesubscription.unsubscribe();
+    this.mesproduitsubscription.unsubscribe()
   }
 
 }
