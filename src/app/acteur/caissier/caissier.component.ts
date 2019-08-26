@@ -24,7 +24,7 @@ export class CaissierComponent implements OnInit {
     this.gerercom.apayer().then(()=>{
       this.gerercom.commandesemit();
 
-      this.comamandesSubscription=this.gerercom.publishcom.subscribe((u)=>{
+      this.comamandesSubscription=this.gerercom.publishcomapyer.subscribe((u)=>{
         this.lescoms=u;
           });
       console.log(this.lescoms);

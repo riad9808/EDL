@@ -1,0 +1,24 @@
+<mat-accordion>
+<app-commande
+
+*ngFor="let com of lescoms; let i = index"
+[a]="com"
+[id]="com.id"
+[numtable]="com.num_table"
+[souscom]="com.souscom"
+[serveur]="com.serveur"
+[valide]="com.valide"
+[index]="i"
+[type]="type"
+
+
+>
+
+
+
+
+
+
+</app-commande>
+
+</mat-accordion>

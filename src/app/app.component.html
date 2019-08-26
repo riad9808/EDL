@@ -12,7 +12,7 @@
       <ul class="navbar-nav mr-auto">
 
         <li class="nav-item" >
-          <a *ngIf="type==='local'" class="nav-link" routerLink="Menu">plats</a>
+          <a *ngIf="type==='client'" class="nav-link" routerLink="client">commander</a>
         </li>
 
         <li class="nav-item" >
@@ -22,14 +22,23 @@
           <a *ngIf="type==='cuisinier'" class="nav-link" routerLink="cuisinier">gerer les comandes</a>
         </li>
         <li class="nav-item" >
-          <a *ngIf="type==='serveur'" class="nav-link" routerLink="add">suivre les comandes</a>
+          <a *ngIf="type==='serveur'" class="nav-link" routerLink="suivrecom">suivre les comandes</a>
         </li>
+        <li class="nav-item" >
+          <a *ngIf="type==='caissier'" class="nav-link" routerLink="caissier">encaissement</a>
+        </li>
+        <li class="nav-item" >
+            <a *ngIf="type==='serveur'" class="nav-link" routerLink="caissier">encaissement</a>
+          </li>
         <li class="nav-item" >
           <a *ngIf="type==='gerent'" class="nav-link" routerLink="gerent/ajoutproduit">ajouter un produit</a>
         </li>
         <li class="nav-item" >
           <a *ngIf="type==='gerent'" class="nav-link" routerLink="gerent/ajoutcompte">ajouter un compte</a>
         </li>
+        <li class="nav-item" >
+            <a *ngIf="type==='gerent'" class="nav-link" routerLink="gerent/gerercompte">gerer les comptes</a>
+          </li>
 
       </ul>
 

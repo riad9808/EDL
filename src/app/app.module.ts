@@ -31,6 +31,8 @@ import { GerercommandeService } from './services/gerercommande.service';
 import { CuisinierComponent } from './acteur/cuisinier/cuisinier.component';
 import { CommandeComponent } from './acteur/cuisinier/commande/commande.component';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { SuivrecommandeComponent } from './suivrecommande/suivrecommande.component';
+import { GerercompteComponent } from './acteur/gerent/gerercompte/gerercompte.component';
 
 const appRoutes: Routes = [
 
@@ -38,6 +40,10 @@ const appRoutes: Routes = [
   { path: 'serveur', canActivate: [AuthguardService],component: ServeurComponent },
   { path: 'gerent', canActivate: [AuthguardService],component: GerentComponent },
   { path: 'cuisinier', canActivate: [AuthguardService],component: CuisinierComponent },
+  { path: 'client', canActivate: [AuthguardService],component: ClientComponent },
+  { path: 'gerent/gerercompte', canActivate: [AuthguardService],component: GerercompteComponent },
+
+  { path: 'suivrecom', canActivate: [AuthguardService],component: SuivrecommandeComponent },
 
   { path: 'gerent/ajoutcompte', canActivate: [AuthguardService],
     component: AjoutCompteComponent },
@@ -64,7 +70,9 @@ const appRoutes: Routes = [
     AjoutCompteComponent,
     AjoutproduitComponent,
     CuisinierComponent,
-    CommandeComponent
+    CommandeComponent,
+    SuivrecommandeComponent,
+    GerercompteComponent
   ],
   imports: [
     HttpClientModule,

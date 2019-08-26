@@ -37,8 +37,10 @@ export class ComanderComponent implements OnInit  , OnDestroy{
 
 
     })
-
-
+/*
+    setInterval(()=>{
+      this.gererplatService.getplat();
+    }, 10000);*/
 
   this.authSubsscription=this.authService.authsubject.subscribe((auths)=>{
     this.authStatus=auths;

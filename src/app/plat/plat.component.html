@@ -1,32 +1,35 @@
 <li class="list-group-item" style="margin : 10px "
 
 
- 
 >
-<!--[ngClass]="{' list-group-item-success': Quantite() ,
-'list-group-item-danger': !Quantite()}"
-[ngStyle]="{'background' : 'url(../assets/backing.jpg)'}"-->
 
-  
 
   <h4 >Plat :  {{ name }}-- quantite : {{ quantite + addedqte }}</h4>
-  
-  
+
+
   <div *ngIf="type==='gerent'">
       <input type="number" class="form-control" [(ngModel)]="addedqte">
-    <button  class="btn btn-dark" (click)="approvisionner()">aprovisionner</button>
-    <button  class="btn btn-dark" (click)="supprimer()">supprimer</button>
+    <button   style="margin : 10px " class="btn btn-dark" (click)="approvisionner()">aprovisionner</button>
+    <button   style="margin : 10px " class="btn btn-dark" (click)="supprimer()">supprimer</button>
 
   </div>
 
   <div *ngIf="type==='serveur'">
     <input type="number" class="form-control" [disabled]="!possible1()" [(ngModel)]="qtcomande">
-  
+
 
     <button style="margin : 10px " class="btn btn-dark" [disabled]="!possible()" (click)="comande()">Comander</button>
     <button style="margin : 10px " class="btn btn-dark" [disabled]="!possible2()" (click)="modifier()">modifier</button>
 
 </div>
- 
+<div *ngIf="type==='client'">
+    <input type="number" class="form-control" [disabled]="!possible1()" [(ngModel)]="qtcomande">
+
+
+    <button style="margin : 10px " class="btn btn-dark" [disabled]="!possible()" (click)="comande()">Comander</button>
+    <button style="margin : 10px " class="btn btn-dark" [disabled]="!possible2()" (click)="modifier()">modifier</button>
+
+</div>
+
   {{msg}}
 </li>

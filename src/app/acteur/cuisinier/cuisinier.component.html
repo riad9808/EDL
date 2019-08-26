@@ -10,6 +10,8 @@
 
                 *ngFor="let com of lescoms; let i = index"
                   [a]="com"
+                  [valide]="com.valide"
+
                  [id]="com.id"
                   [numtable]="com.num_table"
                  [souscom]="com.souscom"

@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { GerercommandeService } from 'src/app/services/gerercommande.service';
 import { PrefixNot } from '@angular/compiler';
 import { type } from 'os';
+import { validateConfig } from '@angular/router/src/config';
 
 @Component({
   selector: 'app-commande',
@@ -13,6 +14,7 @@ export class CommandeComponent implements OnInit {
   @Input() type;
   @Input() a;
   @Input() id;
+  @Input() valide;
   //idd=this.a.commande.id;
   @Input() numtable;
   @Input() souscom;
@@ -24,17 +26,24 @@ export class CommandeComponent implements OnInit {
   ngOnInit() {
     console.log(this.souscom[0].produit);
   }
+
   valider(){
     this.gerercom.cuisiniervalidate(this.id).subscribe((u)=>{
       console.log(u);
     })
-    this.val=false;
+    this.gerercom.avalider().then(()=>{
+      this.gerercom.commandesemit();
+    });
+
   }
   annuler(){
     this.gerercom.cuisinierannuler(this.id).subscribe((u)=>{
       console.log(u);
     })
-    //this.val=false;
+    this.gerercom.avalider().then(()=>{
+      this.gerercom.commandesemit();
+    });
+
   }
   prete(){
     this.gerercom.cuisinierprete(this.id).subscribe((u)=>{
@@ -42,6 +51,24 @@ export class CommandeComponent implements OnInit {
     })
     this.gerercom.avalider().then(()=>{
       this.gerercom.commandesemit();
+    });
+    //this.val=false;
+  }
+  payer(){
+    this.gerercom.caissierpayer(this.id).subscribe((u)=>{
+      console.log(u);
+    })
+    this.gerercom.apayer().then(()=>{
+      this.gerercom.commandesapyeremit();
+    });
+    //this.val=false;
+  }
+  retirer(){
+    this.gerercom.retirercom(this.id).subscribe((u)=>{
+      console.log(u);
+    })
+    this.gerercom.aservir().then(()=>{
+      this.gerercom.commandesaserviremit();
     });
     //this.val=false;
   }

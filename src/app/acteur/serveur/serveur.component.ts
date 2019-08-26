@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./serveur.component.css']
 })
 export class ServeurComponent implements OnInit {
-
+  errorMessage;
   constructor(private gerercommande : GerercommandeService,
     private formBuilder: FormBuilder,
     private router:Router
@@ -23,15 +23,15 @@ commandeForm;
   initForm() {
     this.commandeForm = this.formBuilder.group({
       num_table: ['', Validators.required],
-      
-      
+
+
     });
 }
 onSubmit(commandeForm:NgForm){
     this.gerercommande.createcommande(
       localStorage.getItem('user'),
       this.commandeForm.get('num_table').value);
-      
+
 
   }
   possible(){
@@ -42,7 +42,7 @@ onSubmit(commandeForm:NgForm){
   valider(){
     this.gerercommande.valider().subscribe((res)=>{
       if(res==='succes'){
-        
+
         alert('succes');
         this.router.navigate(['']);
 

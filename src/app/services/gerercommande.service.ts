@@ -13,17 +13,23 @@ export class GerercommandeService {
   possible=false;
   commandes:commande[];
   commandesapyer:commande[];
+  comaservir:commande[];
+  private comaservirsub=new BehaviorSubject(undefined);
+
   private comapyer=new BehaviorSubject(undefined);
   private comsub=new BehaviorSubject(undefined);
   publishcom=this.comsub.asObservable();
   publishcomapyer=this.comapyer.asObservable();
-
-  commandesSubject:Subject<commande[]>= new Subject<commande[]>();
+  publishcomaserv =this.comaservirsub.asObservable();
+ // commandesSubject:Subject<commande[]>= new Subject<commande[]>();
   commandesemit(){
     this.comsub.next(this.commandes);
   }
   commandesapyeremit(){
-    this.comsub.next(this.commandesapyer);
+    this.comapyer.next(this.commandesapyer);
+  }
+  commandesaserviremit(){
+    this.comaservirsub.next(this.comaservir);
   }
   constructor(private _http:HttpClient) {
 
@@ -100,6 +106,28 @@ export class GerercommandeService {
 
 
   }
+
+  aservir(){
+    let x
+    return new Promise((resolve)=>{
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type':  'application/json'
+        })
+      };
+        x= this._http.get<commande[]>('http://127.0.0.1:8000/api/comaservir',httpOptions).subscribe((u)=>{
+          this.comaservir=u;
+          //console.log(this.commandes);
+          this.commandesaserviremit();
+        });
+
+
+        resolve();
+    })
+
+
+
+}
   cuisiniervalidate(id):Observable<boolean> {
     let x
     console.log(id);
@@ -113,8 +141,9 @@ export class GerercommandeService {
           "id":id
         };
         x= this._http.post<boolean>('http://127.0.0.1:8000/api/validateur',data,httpOptions);
-
+        this.avalider().then(   ()=>     resolve());
         resolve();
+
     })
     return x;
   }
@@ -131,7 +160,7 @@ export class GerercommandeService {
           "id":id
         };
         x= this._http.post<boolean>('http://127.0.0.1:8000/api/annulercom',data,httpOptions);
-
+        this.avalider().then(   ()=>     resolve())
         resolve();
     })
     return x;
@@ -149,31 +178,51 @@ export class GerercommandeService {
           "id":id
         };
         x= this._http.post<boolean>('http://127.0.0.1:8000/api/prete',data,httpOptions);
+        this.avalider().then(   ()=>     resolve())
 
         resolve();
     })
     return x;
   }
-
-  /*
-   avalider():Observable<commande[]>{
+  caissierpayer(id):Observable<boolean>{
     let x
+    console.log(id);
     let a=new Promise((resolve)=>{
       const httpOptions = {
         headers: new HttpHeaders({
           'Content-Type':  'application/json'
         })
       };
-        x= this._http.get<commande[]>('http://127.0.0.1:8000/api/comavalider',httpOptions).subscribe((u)=>{
-          this.commandes=u;
-          console.log(this.commandes);
-        });
-
+        let data ={
+          "id":id
+        };
+        x= this._http.post<boolean>('http://127.0.0.1:8000/api/payer',data,httpOptions);
+        this.apayer().then(   ()=>     resolve())
 
         resolve();
     })
-    this.commandesemit();
     return x;
+  }
 
-  }*/
+  retirercom(id):Observable<boolean>{
+    let x
+    console.log(id);
+    let a=new Promise((resolve)=>{
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type':  'application/json'
+        })
+      };
+        let data ={
+          "id":id
+        };
+        x= this._http.post<boolean>('http://127.0.0.1:8000/api/retirercom',data,httpOptions);
+        this.aservir().then(   ()=>     resolve())
+
+        resolve();
+    })
+    return x;
+  }
+
+
 }
