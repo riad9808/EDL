@@ -35,14 +35,17 @@ export class AjoutCompteComponent implements OnInit {
     this.userForm = this.formBuilder.group({
       fullname: ['', Validators.required],
       username: ['', Validators.required],
-
+      password2 :['',[Validators.required]],
       password: ['', [Validators.required, Validators.pattern(/[0-9a-zA-Z]{6,}/)]],
       type: ['', Validators.required],
       telephone: ['',[ Validators.required,Validators.pattern(/[0-9]{10,}/),Validators.maxLength(10)]],
-      
+
     });
 }
 onSubmit(userForm : NgForm){
+  let p1=this.userForm.get('password').value;
+  let p2=this.userForm.get('password2').value;
+
   console.log(this.userForm.get('type').value);
   let User:user=new user(
     this.userForm.get('username').value,
@@ -53,22 +56,29 @@ onSubmit(userForm : NgForm){
     this.userForm.get('type').value
   );
   let a=new Promise((resolve,reject)=>{
-    this.ajoutcompteservice.signup(User).subscribe((b:boolean)=>{
+    if(p1!=p2){
+      reject();
+    }else{
+      this.ajoutcompteservice.signup(User).subscribe((b:boolean)=>{
 
-      this.b=b;
-      resolve();
-    })
+        this.b=b;
+        resolve();
+      })
+    }
+
   })
-   
-    
+
+
     a.then(()=>{
       if(this.b){
       alert("succes");
       this.router.navigate(['gerent']);}
       else
       this.errorMessage="nom d'utilisateur ou telephone dejas utilisé";
+    }).catch(()=>{
+      this.errorMessage='mots de passe incoherent'
     });
- 
+
 
 }
 }

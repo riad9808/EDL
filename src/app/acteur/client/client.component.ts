@@ -12,11 +12,15 @@ export class ClientComponent implements OnInit {
   constructor(private gerercommande : GerercommandeService,private router:Router) { }
 
   ngOnInit() {
+    /*
+    setInterval(()=>{
+      this.gerercommande.checkchanges().then()
+    }, 50000)*/
   }
   nouvellecommande(){
     this.gerercommande.possible=true;
     this.gerercommande.createcommande(
-      localStorage.getItem('user'),
+      sessionStorage.getItem('user'),
       0);
   }
   possible(){
@@ -25,18 +29,13 @@ export class ClientComponent implements OnInit {
 
   }
   valider(){
-    this.gerercommande.valider().subscribe((res)=>{
-      if(res==='succes'){
+
+      this.gerercommande.valider().then((res)=>{
 
         alert('succes');
-        this.router.navigate(['']);
-
-      }else{
-        alert('erreur');
-        this.router.navigate(['']);
-
-      }
-    })
+          this.router.navigate(['']);}).catch((res)=>{
+            alert('erreur');
+              this.router.navigate(['']);});
   }
 
 

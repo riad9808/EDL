@@ -11,7 +11,7 @@ export class SuivrecommandeComponent implements OnInit {
   constructor(
     private gerercom :GerercommandeService
   ) { }
-  type=localStorage.getItem('type');
+  type=sessionStorage.getItem('type');
   comamandesSubscription
   lescoms;
 //comavaservir
@@ -24,6 +24,9 @@ export class SuivrecommandeComponent implements OnInit {
           });
       console.log(this.lescoms);
     });
+    setInterval(()=>{
+      this.gerercom.checkchanges().then()
+    }, 10000)
   }
 
 }

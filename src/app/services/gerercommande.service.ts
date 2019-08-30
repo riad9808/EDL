@@ -3,6 +3,7 @@ import { commande } from '../models/commande.model';
 import { Observable, Subject, BehaviorSubject } from 'rxjs';
 import { souscom } from '../models/souscom.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { resolve, reject } from 'q';
 
 @Injectable({
   providedIn: 'root'
@@ -40,6 +41,7 @@ export class GerercommandeService {
     this.possible=true;
   }
   ajoutsouscomande(a,b) : souscom{
+
     let Souscom :souscom=new souscom(a,b);
     console.log(Souscom);
     GerercommandeService.c.souscom.push(Souscom);
@@ -51,20 +53,34 @@ export class GerercommandeService {
     GerercommandeService.c.souscom.splice(b,1);
     console.log(GerercommandeService.c);
   }
-  valider():Observable<any>{
-    let x
-    let a=new Promise((resolve)=>{
-      const httpOptions = {
-        headers: new HttpHeaders({
-          'Content-Type':  'application/json'
-        })
-      };
-        x= this._http.post<any>('http://127.0.0.1:8000/api/commander',GerercommandeService.c,httpOptions);
-        this.possible=false;
+  valider(){
+    //let x:Subject<any>= new Subject;
 
-        resolve();
+         return new Promise((resolve,reject)=>{
+          if(GerercommandeService.c.souscom.length===0){
+            this.possible=false;
+
+            reject();
+          }else{
+            const httpOptions = {
+              headers: new HttpHeaders({
+                'Content-Type':  'application/json'
+              })
+            };
+               this._http.post<any>('http://127.0.0.1:8000/api/commander',GerercommandeService.c,httpOptions).subscribe((u)=>{
+                this.possible=false;
+
+
+               });
+               resolve();
+
+          }
+
     })
-    return x;
+
+
+
+
 
   }
   avalider(){
@@ -77,7 +93,8 @@ export class GerercommandeService {
       };
         x= this._http.get<commande[]>('http://127.0.0.1:8000/api/comavalider',httpOptions).subscribe((u)=>{
           this.commandes=u;
-          console.log(this.commandes);
+          //this.checkchanges();
+          //console.log(this.commandes);
           this.commandesemit();
         });
 
@@ -95,6 +112,7 @@ export class GerercommandeService {
         };
           x= this._http.get<commande[]>('http://127.0.0.1:8000/api/apayer',httpOptions).subscribe((u)=>{
             this.commandesapyer=u;
+           // this.checkchanges();
             //console.log(this.commandes);
             this.commandesapyeremit();
           });
@@ -115,8 +133,12 @@ export class GerercommandeService {
           'Content-Type':  'application/json'
         })
       };
-        x= this._http.get<commande[]>('http://127.0.0.1:8000/api/comaservir',httpOptions).subscribe((u)=>{
+      let data = {
+        "serveur":sessionStorage.getItem('user')
+      }
+        x= this._http.post<commande[]>('http://127.0.0.1:8000/api/comaservir',data,httpOptions).subscribe((u)=>{
           this.comaservir=u;
+         // this.checkchanges();
           //console.log(this.commandes);
           this.commandesaserviremit();
         });
@@ -222,6 +244,40 @@ export class GerercommandeService {
         resolve();
     })
     return x;
+  }
+  static datechange:Date=new Date();
+ static  dernieredate:Date;
+
+  checkchanges(){
+    return new Promise((resolve,reject)=>{
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type':  'application/json'
+      })
+    };
+    this._http.get<Date>('http://127.0.0.1:8000/api/lastupdate',httpOptions).subscribe((u)=>{
+      GerercommandeService.dernieredate=GerercommandeService.datechange;
+      GerercommandeService.datechange=u;
+
+    });
+    console.log('changer '+GerercommandeService.datechange);
+    if(GerercommandeService.dernieredate<GerercommandeService.datechange){
+
+      let a= new Promise((resolve)=>{
+
+         this.aservir().then();
+        this.apayer().then();
+        this.avalider().then();
+
+        resolve();
+      })
+      a.then(()=>{
+        resolve();
+      })
+
+    }
+    resolve();
+    });
   }
 
 

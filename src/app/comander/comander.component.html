@@ -1,19 +1,25 @@
 
-      <h2 class="" style="margin : 10px  ">Menu  </h2>
+      <h4 class="" style=" margin-left :20px ; margin-bottom : 40px "> Menu  </h4>
 
-      <ul class="list-group ">
+
+
+
+
+
+
 
         <app-plat
 
-                *ngFor="let plat of produits; let i = index"
+                *ngFor="let produit of produits; let i = index"
 
-                 [id]="plat.id"
+                 [id]="produit.id"
                   [type]="type"
-                 [name]="plat.categorie"
-                  [type]="type"
+                  [prix]="produit.prix"
+                 [categorie]="produit.categorie"
+                 [extra]="produit.extra"
+                 [taille]="produit.taille"
                  [index]="i"
                   [authStatus]="authStatus"
-                 [quantite]="plat.qtstock"></app-plat>
+                 [quantite]="produit.qtstock"></app-plat>
 
-      </ul>
 

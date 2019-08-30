@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { identifierModuleUrl } from '@angular/compiler';
+import { identifierModuleUrl, PrefixNot } from '@angular/compiler';
 import { GererplatService } from '../services/gererplat.service';
 import { AuthService } from '../services/auth.service';
 import { AppComponent } from '../app.component';
@@ -22,15 +22,20 @@ export class PlatComponent implements OnInit {
     private authService : AuthService,
     private gerecommande:GerercommandeService
 ) { }
+
+panelOpenState = false;
 addedqte=0;
 @Input() id;
-@Input() name;
+@Input() categorie;
+@Input() extra;
+@Input() taille;
+@Input() prix;
 @Input() quantite ;
 @Input() index;
 @Input() authStatus;
 @Input() type;
 msg;
-qtcomande=0;
+qtcomande=1;
 total=this.addedqte + this.quantite;
  ngOnInit() {
 
@@ -41,7 +46,7 @@ total=this.addedqte + this.quantite;
 mysous;
   possible(){
 
-      return this.gerecommande.possible&&(this.qtcomande<=this.quantite)&&this.p;
+      return this.gerecommande.possible&&(this.qtcomande<=this.quantite)&&this.p&&(this.qtcomande>0);
 
   }
   possible1(){
@@ -51,12 +56,12 @@ mysous;
   }
   possible2(){
 
-    return this.gerecommande.possible&&this.pmod;
+    return this.gerecommande.possible&&this.pmod&&(this.qtcomande>0);
 
 }
 
   modifier(){
-    this.qtcomande=0;
+    this.qtcomande=1;
     this.p=true;
     this.gerecommande.suppsous(this.mysous);
   }

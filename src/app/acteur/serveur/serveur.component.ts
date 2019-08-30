@@ -17,6 +17,10 @@ export class ServeurComponent implements OnInit {
 numtable;
 commandeForm;
   ngOnInit() {
+    /*
+    setInterval(()=>{
+      this.gerercommande.checkchanges().then()
+    }, 5000)*/
     this.initForm();
     //this.gerercommande.possiblesub.next(this.commandeForm.in)
   }
@@ -29,19 +33,28 @@ commandeForm;
 }
 onSubmit(commandeForm:NgForm){
     this.gerercommande.createcommande(
-      localStorage.getItem('user'),
+      sessionStorage.getItem('user'),
       this.commandeForm.get('num_table').value);
 
 
   }
   possible(){
-    //console.log(this.authStatus);
+
       return this.gerercommande.possible
-   // return this.authStatus&&this.quantite>0;
+
   }
   valider(){
-    this.gerercommande.valider().subscribe((res)=>{
-      if(res==='succes'){
+    this.gerercommande.valider().then((res)=>{
+
+      alert('succes');
+        this.router.navigate(['']);})
+        .catch((res)=>{
+          alert('erreur');
+            this.router.navigate(['']);});
+    /*this.gerercommande.valider().catch((res)=>{
+          alert('erreur');
+            this.router.navigate(['']);});
+    /*  if(res==='succes'){
 
         alert('succes');
         this.router.navigate(['']);
@@ -50,8 +63,8 @@ onSubmit(commandeForm:NgForm){
         alert('erreur');
         this.router.navigate(['']);
 
-      }
-    })
+      }*/
+
   }
 
 }

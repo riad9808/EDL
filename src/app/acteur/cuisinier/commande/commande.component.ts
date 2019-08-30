@@ -3,6 +3,8 @@ import { GerercommandeService } from 'src/app/services/gerercommande.service';
 import { PrefixNot } from '@angular/compiler';
 import { type } from 'os';
 import { validateConfig } from '@angular/router/src/config';
+import { Router } from '@angular/router';
+import { commande } from 'src/app/models/commande.model';
 
 @Component({
   selector: 'app-commande',
@@ -21,10 +23,14 @@ export class CommandeComponent implements OnInit {
   @Input() serveur;
   @Input() index;
   @Input() prix;
-  constructor(private gerercom : GerercommandeService) { }
+
+  constructor(private gerercom : GerercommandeService,
+    private router : Router
+    ) { }
   val=true;
   ngOnInit() {
     console.log(this.souscom[0].produit);
+
   }
 
   valider(){
@@ -43,6 +49,9 @@ export class CommandeComponent implements OnInit {
     this.gerercom.avalider().then(()=>{
       this.gerercom.commandesemit();
     });
+    this.gerercom.aservir().then(()=>{
+      this.gerercom.commandesaserviremit();
+    });
 
   }
   prete(){
@@ -60,7 +69,11 @@ export class CommandeComponent implements OnInit {
     })
     this.gerercom.apayer().then(()=>{
       this.gerercom.commandesapyeremit();
+
     });
+    this.gerercom.aservir().then(()=>{
+      this.gerercom.commandesaserviremit();
+    })
     //this.val=false;
   }
   retirer(){
@@ -70,6 +83,6 @@ export class CommandeComponent implements OnInit {
     this.gerercom.aservir().then(()=>{
       this.gerercom.commandesaserviremit();
     });
-    //this.val=false;
+    this.router.navigate(['']);    //this.val=false;
   }
 }

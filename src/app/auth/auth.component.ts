@@ -15,7 +15,7 @@ import { reject } from 'q';
 })
 export class AuthComponent implements OnInit {
 
-  
+
   signinForm: FormGroup;
   errorMessage: string;
   typesubscription: any;
@@ -23,12 +23,12 @@ export class AuthComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
              private authService : AuthService,
-             
+
               private router: Router) { }
 
   ngOnInit() {
     this.initForm();
-  
+
   }
 
   initForm() {
@@ -57,26 +57,28 @@ export class AuthComponent implements OnInit {
               this.authService.emitusertypesubject();
               localStorage.setItem('type', this.type);
               localStorage.setItem('user',username);
+              sessionStorage.setItem('type', this.type);
+              sessionStorage.setItem('user',username);
               resolve();
             }
-           
+
 
           }
-          
+
           //localStorage.setItem('logged', 'true');
-          
+
          });
-         
+
     });
-   
+
     a.then(()=>{
       this.router.navigate(['/'+this.type]);
-    });
-    a.catch(()=>{
+    })
+    .catch(()=>{
       this.errorMessage='erreur de conexion';
     });
-         
-      
+
+
       }
 
   }

@@ -21,7 +21,7 @@ export class AuthService {
   emitusertypesubject(){
     this.usertypesubject.next(this.usertype);
   }
- 
+
   signout(){
     this.authsubject.next(false);
     this.isAuth=false;
@@ -29,6 +29,8 @@ export class AuthService {
     this.usertypesubject.next('local');
     localStorage.setItem('logged', 'false');
         localStorage.setItem('type', 'local');
+        sessionStorage.setItem('logged', 'false');
+        sessionStorage.setItem('type', 'local');
 
   }
   signInUser(username: string, password: string):Observable<string>{
@@ -41,10 +43,10 @@ export class AuthService {
       })
     };
       return this._http.post<string>('http://127.0.0.1:8000/api/signin',u,httpOptions);
-   
-     //this.typeSubject.next("gerent"); 
+
+     //this.typeSubject.next("gerent");
      // localStorage.setItem('userType',UserType.serveur.toString());
-    
+
   }
-  
+
 }

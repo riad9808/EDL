@@ -33,6 +33,8 @@ import { CommandeComponent } from './acteur/cuisinier/commande/commande.componen
 import {MatExpansionModule} from '@angular/material/expansion';
 import { SuivrecommandeComponent } from './suivrecommande/suivrecommande.component';
 import { GerercompteComponent } from './acteur/gerent/gerercompte/gerercompte.component';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatListModule} from '@angular/material/list';
 
 const appRoutes: Routes = [
 
@@ -89,7 +91,9 @@ const appRoutes: Routes = [
      MatMenuModule,
      MatSelectModule,
      MatSidenavModule,
-     MatExpansionModule
+     MatExpansionModule,
+     MatGridListModule,
+     MatListModule
   ],
   providers: [GererplatService,AuthService,AuthguardService,AjoutcompteService,GerercommandeService],
   bootstrap: [AppComponent],

@@ -11,7 +11,6 @@ import { AuthService } from './services/auth.service';
 })
 export class AppComponent implements OnInit , OnDestroy {
 
-
   ngOnDestroy(): void {
     this.authSubsscription.unsubscribe();
     this.typesubscription.unsubscribe();

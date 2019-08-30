@@ -14,29 +14,35 @@ import { produit } from '../models/produit.model';
 export class ComanderComponent implements OnInit  , OnDestroy{
 
   constructor(private gererplatService : GererplatService,
-    private authService : AuthService) { }
+    private authService : AuthService) {
+
+    }
 
 
   typesubscription: Subscription;
-  type: string=localStorage.getItem('type');
+  type: string=sessionStorage.getItem('type');
   public mesplats;
   mesproduitsubscription :Subscription;
   authStatus:boolean;
   produits :produit[];
-
 
   authSubsscription:Subscription;
   ngOnInit() {
 
       this.gererplatService.getplat().then(()=>{
 
-          this.mesproduitsubscription=this.gererplatService.published.subscribe((data)=>{
-            this.produits=data;
-          })
+            this.mesproduitsubscription=this.gererplatService.published.subscribe((data:produit[])=>{
+             this.produits=data;
+            });
+
+
+
+
 
 
 
     })
+
 /*
     setInterval(()=>{
       this.gererplatService.getplat();
@@ -48,12 +54,6 @@ export class ComanderComponent implements OnInit  , OnDestroy{
   this.typesubscription=this.authService.usertypesubject.subscribe((typu)=>{
     this.type=typu;
   });
-/*
-    this.gererplatService.getplat().subscribe((data)=>{
-      this.mesplats=data;
-    })
-    this.gererplatService.generatePlat();
-*/
 
 
     console.log('type'+this.type);

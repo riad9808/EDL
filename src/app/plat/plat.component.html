@@ -1,35 +1,57 @@
-<li class="list-group-item" style="margin : 10px "
 
 
->
 
 
-  <h4 >Plat :  {{ name }}-- quantite : {{ quantite + addedqte }}</h4>
+<mat-card style="margin: 20px;width: 90% ;  ">
+
+<mat-expansion-panel (opened)="panelOpenState = true"
+                       (closed)="panelOpenState = false">
+    <mat-expansion-panel-header >
+      <mat-panel-title style="width: 400px">
+        <h4>
+
+          {{categorie}} :  {{ extra }} &ensp; {{taille}}
+
+        </h4>
+        </mat-panel-title>
+      <mat-panel-description>
+       prix : {{prix}} da
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <div *ngIf="type==='gerent'">
+        <h6> quantite : {{ quantite + addedqte }} </h6>
+       <label>entrez la quantité à ajouter</label>
+        <input type="number" class="form-control" [(ngModel)]="addedqte" placeholder="entrez la quantité à ajouter">
+      <button   style="margin : 10px " mat-raised-button color="primary"  (click)="approvisionner()">aprovisionner</button>
+      <button   style="margin-right : 10px " mat-raised-button color="primary"  (click)="supprimer()">supprimer</button>
+
+    </div>
+    <div *ngIf="type==='serveur'">
+        <h6> quantite : {{ quantite + addedqte }} </h6>
+        <label>entrez la quantité à commander</label>
+
+        <input type="number" class="form-control" placeholder="entrez la quantité à servir" [disabled]="!possible1()" [(ngModel)]="qtcomande">
 
 
-  <div *ngIf="type==='gerent'">
-      <input type="number" class="form-control" [(ngModel)]="addedqte">
-    <button   style="margin : 10px " class="btn btn-dark" (click)="approvisionner()">aprovisionner</button>
-    <button   style="margin : 10px " class="btn btn-dark" (click)="supprimer()">supprimer</button>
+        <button style="margin : 10px " mat-raised-button color="primary"  [disabled]="!possible()" (click)="comande()">Comander</button>
+        <button style="margin : 10px "mat-raised-button color="primary"  [disabled]="!possible2()" (click)="modifier()">modifier</button>
 
-  </div>
-
-  <div *ngIf="type==='serveur'">
-    <input type="number" class="form-control" [disabled]="!possible1()" [(ngModel)]="qtcomande">
+    </div>
+    <div *ngIf="type==='client'">
+        <input type="number" class="form-control" [disabled]="!possible1()" [(ngModel)]="qtcomande">
 
 
-    <button style="margin : 10px " class="btn btn-dark" [disabled]="!possible()" (click)="comande()">Comander</button>
-    <button style="margin : 10px " class="btn btn-dark" [disabled]="!possible2()" (click)="modifier()">modifier</button>
+        <button style="margin : 10px " mat-raised-button color="primary"  [disabled]="!possible()" (click)="comande()">Comander</button>
+        <button style="margin : 10px " mat-raised-button color="primary"  [disabled]="!possible2()" (click)="modifier()">modifier</button>
 
-</div>
-<div *ngIf="type==='client'">
-    <input type="number" class="form-control" [disabled]="!possible1()" [(ngModel)]="qtcomande">
+    </div>
+  </mat-expansion-panel>
 
 
-    <button style="margin : 10px " class="btn btn-dark" [disabled]="!possible()" (click)="comande()">Comander</button>
-    <button style="margin : 10px " class="btn btn-dark" [disabled]="!possible2()" (click)="modifier()">modifier</button>
 
-</div>
+
 
   {{msg}}
-</li>
+</mat-card>
+

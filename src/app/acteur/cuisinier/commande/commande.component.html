@@ -1,34 +1,46 @@
 
-<mat-expansion-panel style="margin-top: 20px">
+<mat-expansion-panel style="margin-top: 20px"
+[ngClass]="{' list-group-item-success': valide==='prete',
+'list-group-item-danger': valide==='annuler'}"
+>
 
 <mat-expansion-panel-header>
-  <mat-panel-title>
+  <mat-panel-title style="max-width: 320px;">
     commande numero :  {{ id }}
-     --   numero de table : {{ numtable }} --
+     -- <div *ngIf="numtable!=0">  numero de table : {{ numtable }}</div>
+     <div *ngIf="numtable==0"> commande en ligne </div> --
      <div *ngIf="type==='caissier'">
        à payer  {{prix}}
      </div>
 
     </mat-panel-title>
-  <mat-panel-description>
-      commande passé par  : {{ serveur }}  {{valide}}
+  <mat-panel-description style="width: 300px;margin-left:10px ">
+    <div>  commande passé par  : <b>{{ serveur }}</b> </div> &nbsp;
+      <div>etat de la commande : <b style="text-decoration-color: blueviolet">{{valide}}</b></div>
       <div *ngIf="type==='cuisinier'">
-      <button style="margin-left: 100px" mat-raised-button color="primary" *ngIf="valide==='nonvalide'" (click)="valider()">valider</button>
-      <button style="margin-left: 100px" mat-raised-button color="accent" *ngIf="valide==='valide'" (click)="prete()">prete</button>
-
+      <button style="margin-left: 50px" mat-raised-button color="primary" *ngIf="valide==='nonvalide'" (click)="valider()">valider</button>
+      <button style="margin-left: 50px" mat-raised-button color="accent" *ngIf="valide==='valide'" (click)="prete()">prete</button>
+ <!--
       <button style="margin-left: 30px" mat-raised-button color="warn" *ngIf="valide==='nonvalide'" (click)="annuler()">annuler</button>
-    </div>
+  -->  </div>
     <div *ngIf="type==='caissier'">
+        <button style="margin-left: 50px" mat-raised-button color="primary"  (click)="payer()">payer</button>
+    </div>
+    <!--
+      <div *ngIf="type==='serveur'">
         <button style="margin-left: 100px" mat-raised-button color="primary"  (click)="payer()">payer</button>
     </div>
-    <div *ngIf="type==='serveur'">
-        <button style="margin-left: 100px" mat-raised-button color="primary"  (click)="payer()">payer</button>
-    </div>
+    -->
+    <button style="margin-left: 30px" mat-raised-button color="warn" *ngIf="valide==='nonvalide'" (click)="annuler()">annuler</button>
+
     <div *ngIf="type==='serveur' && valide==='annuler'">
 
-      <button style="margin-left: 100px" mat-raised-button color="warn"  (click)="retirer()">retirer</button>
+      <button style="margin-left: 50px" mat-raised-button color="warn"  (click)="retirer()">commander à nouveau</button>
   </div>
+  <div *ngIf="type==='client' && valide==='annuler'">
 
+      <button style="margin-left: 50px" mat-raised-button color="warn"  (click)="retirer()">retirer la commande</button>
+  </div>
   </mat-panel-description>
 </mat-expansion-panel-header>
 

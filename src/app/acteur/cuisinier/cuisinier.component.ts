@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
 export class CuisinierComponent implements OnInit {
 
   constructor(private gerercom: GerercommandeService) { }
-  type=localStorage.getItem('type');
+  type=sessionStorage.getItem('type');
 
   comamandesSubscription:Subscription;
   lescoms:commande[];
@@ -22,10 +22,16 @@ export class CuisinierComponent implements OnInit {
 
       this.comamandesSubscription=this.gerercom.publishcom.subscribe((u)=>{
         this.lescoms=u;
+
           });
       console.log(this.lescoms);
+
+
     });
 
+    setInterval(()=>{
+      this.gerercom.checkchanges().then()
+    }, 2000)
 
 
 

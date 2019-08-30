@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./caissier.component.css']
 })
 export class CaissierComponent implements OnInit {
-  type=localStorage.getItem('type');
+  type=sessionStorage.getItem('type');
   payerForm: FormGroup;
   errorMessage: string;
 
@@ -29,7 +29,9 @@ export class CaissierComponent implements OnInit {
           });
       console.log(this.lescoms);
     });
-
+    setInterval(()=>{
+      this.gerercom.checkchanges().then()
+    }, 60000)
 
   }
 
