@@ -35,6 +35,7 @@ import { SuivrecommandeComponent } from './suivrecommande/suivrecommande.compone
 import { GerercompteComponent } from './acteur/gerent/gerercompte/gerercompte.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatListModule} from '@angular/material/list';
+import { FourOhFourComponent } from './four-oh-four/four-oh-four.component';
 
 const appRoutes: Routes = [
 
@@ -55,8 +56,8 @@ const appRoutes: Routes = [
   { path: 'auth', component: AuthComponent },
   { path: '',component: ComanderComponent },
 
- // { path: 'not-found', component: FourOhFourComponent },
- // { path: '**', redirectTo: 'not-found' }
+ { path: 'not-found', component: FourOhFourComponent },
+ { path: '**', redirectTo: 'not-found' }
 
 ];
 @NgModule({
@@ -74,7 +75,8 @@ const appRoutes: Routes = [
     CuisinierComponent,
     CommandeComponent,
     SuivrecommandeComponent,
-    GerercompteComponent
+    GerercompteComponent,
+    FourOhFourComponent
   ],
   imports: [
     HttpClientModule,

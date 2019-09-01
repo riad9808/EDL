@@ -33,18 +33,29 @@ export class GerercompteComponent implements OnInit {
   onSubmitmodif(modifierForm : NgForm) {
     const username = this.modifierForm.get('username').value;
     const password = this.modifierForm.get('password').value;
-    this.gerercompte.modifiermdp(username,password).then(()=>{
-      alert("succes");
+    this.gerercompte.modifiermdp(username,password).then((u)=>{
+      if(u==false){
+        alert("utilisateur inexistant");
       this.router.navigate(['/gerent']);
+      }else{
+        alert("succes");
+        this.router.navigate(['/gerent']);
+      }
+
     })
 
   }
   onSubmitsupp(suppForm : NgForm){
     const username = this.suppForm.get('username2').value;
 
-    this.gerercompte.suppcompte(username).then(()=>{
-      alert("succes");
+    this.gerercompte.suppcompte(username).then((u)=>{
+      if(u==false){
+        alert("utilisateur inexistant");
       this.router.navigate(['/gerent']);
+      }else{
+        alert("succes");
+        this.router.navigate(['/gerent']);
+      }
     })
   }
 

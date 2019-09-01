@@ -3,32 +3,32 @@
 
 
 
-<div class="container shadow-lg p-3 mb-5 bg-white rounded-lg" [ngStyle]="{ 'background-color': '#F8F8F8	'}">
+<div class="container shadow-lg p-3 mb-5 bg-white rounded-lg"  >
   <nav class="navbar navbar-expand-lg navbar-light  justify-content-between "  >
 
-    <a class="navbar-brand " routerLink="">Restautrant</a>
+    <a class="navbar-brand " routerLink=""><b>Restautrant</b> {{ now | date:'medium'  }}</a>
     <div class="collapse navbar-collapse container-fluid" id="navbarSupportedContent">
 
       <ul class="navbar-nav mr-auto">
 
         <li class="nav-item" >
-          <a *ngIf="type==='client'" class="nav-link" routerLink="client">commander</a>
+          <a *ngIf="type==='client'" class="nav-link" mat-raised-button routerLink="client">commander</a>
         </li>
 
         <li class="nav-item" >
-          <a *ngIf="type==='serveur'" class="nav-link" routerLink="serveur">prendre une comande</a>
+          <a *ngIf="type==='serveur'" class="nav-link" mat-raised-button routerLink="serveur">prendre une comande</a>
         </li>
         <li class="nav-item" >
-          <a *ngIf="type==='cuisinier'" class="nav-link" routerLink="cuisinier">gerer les comandes</a>
+          <a *ngIf="type==='cuisinier'" class="nav-link" mat-raised-button routerLink="cuisinier">gerer les comandes</a>
         </li>
         <li class="nav-item" >
-          <a *ngIf="type==='serveur'" class="nav-link" routerLink="suivrecom">suivre les comandes</a>
+          <a *ngIf="type==='serveur'" class="nav-link" mat-raised-button routerLink="suivrecom">suivre les comandes</a>
         </li>
         <li class="nav-item" >
-            <a *ngIf="type==='client'" class="nav-link" routerLink="suivrecom">suivre les comandes</a>
+            <a *ngIf="type==='client'" class="nav-link" mat-raised-button  routerLink="suivrecom">suivre les comandes</a>
           </li>
         <li class="nav-item" >
-          <a *ngIf="type==='caissier'" class="nav-link" routerLink="caissier">encaissement</a>
+          <a *ngIf="type==='caissier'" class="nav-link" mat-raised-button routerLink="caissier">encaissement</a>
         </li>
         <!--
 
@@ -38,25 +38,24 @@
         -->
 
         <li class="nav-item" >
-          <a *ngIf="type==='gerent'" class="nav-link" routerLink="gerent/ajoutproduit">ajouter un produit</a>
+          <a *ngIf="type==='gerent'" class="nav-link"  mat-raised-button routerLink="gerent/ajoutproduit">ajouter un produit</a>
         </li>
         <li class="nav-item" >
-          <a *ngIf="type==='gerent'" class="nav-link" routerLink="gerent/ajoutcompte">ajouter un compte</a>
+          <a *ngIf="type==='gerent'" class="nav-link" mat-raised-button routerLink="gerent/ajoutcompte">ajouter un compte</a>
         </li>
         <li class="nav-item" >
-            <a *ngIf="type==='gerent'" class="nav-link" routerLink="gerent/gerercompte">gerer les comptes</a>
+            <a *ngIf="type==='gerent'" class="nav-link " mat-raised-button routerLink="gerent/gerercompte">gerer les comptes</a>
           </li>
 
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
-        <li class="nav-item" >
-          <a class="navbar-brand" *ngIf="!authStatus" routerLink="auth">Authentification</a>
 
-        </li>
+          <button mat-raised-button *ngIf="!authStatus" routerLink="auth">Authentification</button>
+
         <li class="nav-item" >
 
-            <a class="navbar-brand" *ngIf="authStatus" (click)="onSignOut()" >Se déconnecter</a>
+            <button mat-raised-button *ngIf="authStatus" (click)="onSignOut()" >Se déconnecter</button>
           </li>
 
       </ul>

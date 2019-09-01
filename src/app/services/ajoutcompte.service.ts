@@ -33,7 +33,7 @@ export class AjoutcompteService {
       return new Promise((resolve)=>{
         this._http.post<boolean>('http://127.0.0.1:8000/api/changepass',data,httpOptions)
         .subscribe((u)=>{
-            resolve();
+            resolve(u);
         });
       });
 
@@ -51,7 +51,7 @@ export class AjoutcompteService {
       return new Promise((resolve)=>{
         this._http.post<boolean>('http://127.0.0.1:8000/api/suppuser',data,httpOptions)
         .subscribe((u)=>{
-            resolve();
+            resolve(u);
         });
       });
 

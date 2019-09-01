@@ -16,7 +16,7 @@ export class AppComponent implements OnInit , OnDestroy {
     this.typesubscription.unsubscribe();
   }
 
-
+  now:number;
   constructor(private gererplatService : GererplatService,
               private router: Router,
               private authService : AuthService
@@ -28,6 +28,13 @@ export class AppComponent implements OnInit , OnDestroy {
       title = 'EDL';
       type ="local";
   ngOnInit() {
+    this.now;
+
+
+        setInterval(() => {
+          this.now = Date.now();
+        }, 1);
+
     this.authService.signout();
    this.authSubsscription=this.authService.authsubject.subscribe((auths)=>{
      this.authStatus=auths;

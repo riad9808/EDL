@@ -25,23 +25,36 @@ export class ComanderComponent implements OnInit  , OnDestroy{
   mesproduitsubscription :Subscription;
   authStatus:boolean;
   produits :produit[];
-
+lesplats:produit[];
+lesboissons:produit[];
   authSubsscription:Subscription;
   ngOnInit() {
 
-      this.gererplatService.getplat().then(()=>{
+        this.gererplatService.getplat().then(()=>{
 
-            this.mesproduitsubscription=this.gererplatService.published.subscribe((data:produit[])=>{
-             this.produits=data;
-            });
+          this.mesproduitsubscription=this.gererplatService.published.subscribe((data:produit[])=>{
+           this.produits=data;
+           this.lesplats=[];
+           this.lesboissons=[];
+           this.produits.forEach(element => {
+             if(element.categorie==='plat'){
+               this.lesplats.push(element);
+             }
+             else{
+               this.lesboissons.push(element);
+             }
+           });
+           console.log( this.produits.length);
+
+          })
+
+        });
 
 
 
 
 
 
-
-    })
 
 /*
     setInterval(()=>{

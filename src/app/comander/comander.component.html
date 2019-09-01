@@ -2,24 +2,44 @@
       <h4 class="" style=" margin-left :20px ; margin-bottom : 40px "> Menu  </h4>
 
 
+      <div class="row">
+
+
+        <div class="col-md-6 col-sm-12">
+            <h6 class="" style=" margin-left :20px ; margin-bottom : 40px "> les plats </h6>
+            <app-plat
+
+            *ngFor="let produit of lesplats; let i = index"
+
+             [id]="produit.id"
+              [type]="type"
+              [prix]="produit.prix"
+             [categorie]="produit.categorie"
+             [extra]="produit.extra"
+             [taille]="produit.taille"
+             [index]="i"
+              [authStatus]="authStatus"
+             [quantite]="produit.qtstock"></app-plat>
+
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <h6 class="" style=" margin-left :20px ; margin-bottom : 40px "> les boissons </h6>
+            <app-plat
+
+            *ngFor="let produit of lesboissons; let i = index"
+
+             [id]="produit.id"
+              [type]="type"
+              [prix]="produit.prix"
+             [categorie]="produit.categorie"
+             [extra]="produit.extra"
+             [taille]="produit.taille"
+             [index]="i"
+              [authStatus]="authStatus"
+             [quantite]="produit.qtstock"></app-plat>
+
+        </div>
 
 
 
-
-
-
-        <app-plat
-
-                *ngFor="let produit of produits; let i = index"
-
-                 [id]="produit.id"
-                  [type]="type"
-                  [prix]="produit.prix"
-                 [categorie]="produit.categorie"
-                 [extra]="produit.extra"
-                 [taille]="produit.taille"
-                 [index]="i"
-                  [authStatus]="authStatus"
-                 [quantite]="produit.qtstock"></app-plat>
-
-
+</div>

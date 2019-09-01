@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { GerercommandeService } from 'src/app/services/gerercommande.service';
 import { commande } from 'src/app/models/commande.model';
 import { Subscription } from 'rxjs';
@@ -8,7 +8,8 @@ import { Subscription } from 'rxjs';
   templateUrl: './cuisinier.component.html',
   styleUrls: ['./cuisinier.component.css']
 })
-export class CuisinierComponent implements OnInit {
+export class CuisinierComponent implements OnInit ,OnDestroy{
+
 
   constructor(private gerercom: GerercommandeService) { }
   type=sessionStorage.getItem('type');
@@ -37,5 +38,7 @@ export class CuisinierComponent implements OnInit {
 
   }
 
-
+  ngOnDestroy(): void {
+    this.comamandesSubscription.unsubscribe();
+  }
 }

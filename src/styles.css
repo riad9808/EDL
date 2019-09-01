@@ -1,4 +1,6 @@
 
 body{
-background-color: #a7ffeb
+background-color: #a7ffeb;
+background-image: url('assets/wallpaper.jpg');
+background-size:cover
 }

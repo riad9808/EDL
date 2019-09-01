@@ -49,10 +49,20 @@ getplat(){
   return new Promise((resolve)=>{
     this._http.get<produit[]>('http://127.0.0.1:8000/api/produit',httpOptions).subscribe((data)=>{
       this.produits=data;
+      /*let a=data;
+      let b:produit[]=[];
+      a.forEach(element => {
+        if(element.categorie==='plat'){
+         b.push(element)
+        }
+
+      });
+      this.produits=b*/
       this.emitproduits();
+      resolve();
     });
 
-    resolve();
+
   });
 
 

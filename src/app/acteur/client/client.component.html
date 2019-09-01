@@ -1,13 +1,13 @@
 
 
-        <button mat-button style="margin-left: 37%"
+        <button mat-raised-button color="primary" style="margin-left: 37%;margin-bottom:10px;width:250px"
         type="submit"
         (click)="nouvellecommande()">nouvelle commande</button>
 
 
 
 
-<button mat-button style="margin-left: 37%"  [disabled]="!possible()" (click)="valider()">valider la commande</button>
+<button mat-raised-button color="accent" style="margin-left: 37%;margin-bottom:10px;width:250px "  [disabled]="!possible()" (click)="valider()">valider la commande</button>
 
 <p class="text-danger">{{ errorMessage }}</p>
 <app-comander></app-comander>

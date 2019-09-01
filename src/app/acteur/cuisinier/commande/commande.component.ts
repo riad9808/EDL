@@ -23,6 +23,7 @@ export class CommandeComponent implements OnInit {
   @Input() serveur;
   @Input() index;
   @Input() prix;
+  @Input() date;
 
   constructor(private gerercom : GerercommandeService,
     private router : Router

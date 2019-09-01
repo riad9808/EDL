@@ -4,7 +4,7 @@ export class commande{
     serveur;
     numtable;
     valide;
-    date:Date;
+    updated_at:Date;
     souscom:Array<souscom>;
     prix;
     constructor(serveur,numtable){
