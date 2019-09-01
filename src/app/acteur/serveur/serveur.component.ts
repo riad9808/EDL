@@ -31,7 +31,7 @@ commandeForm;
 
     });
 }
-onSubmit(commandeForm:NgForm){
+onSubmit(){
     this.gerercommande.createcommande(
       sessionStorage.getItem('user'),
       this.commandeForm.get('num_table').value);

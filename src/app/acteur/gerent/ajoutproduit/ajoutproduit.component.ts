@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class AjoutproduitComponent implements OnInit {
 produitForm:FormGroup;
 b:boolean;
-
+errorMessage
   constructor(private formBuilder: FormBuilder ,
     private gererplatService : GererplatService,
     private router:Router
@@ -36,7 +36,7 @@ b:boolean;
 
     });
 }
-onSubmit(produitForm:NgForm){
+onSubmit(){
   let Produit:produit=new produit(
     this.produitForm.get('categorie').value,
     this.produitForm.get('produit').value,

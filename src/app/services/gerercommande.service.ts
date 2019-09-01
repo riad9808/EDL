@@ -67,7 +67,7 @@ export class GerercommandeService {
                 'Content-Type':  'application/json'
               })
             };
-               this._http.post<any>('http://127.0.0.1:8000/api/commander',GerercommandeService.c,httpOptions).subscribe((u)=>{
+               this._http.post<any>('http://restaurant.edl/api/commander',GerercommandeService.c,httpOptions).subscribe((u)=>{
                 this.possible=false;
 
 
@@ -91,7 +91,7 @@ export class GerercommandeService {
           'Content-Type':  'application/json'
         })
       };
-        x= this._http.get<commande[]>('http://127.0.0.1:8000/api/comavalider',httpOptions).subscribe((u)=>{
+        x= this._http.get<commande[]>('http://restaurant.edl/api/comavalider',httpOptions).subscribe((u)=>{
           this.commandes=u;
           //this.checkchanges();
           //console.log(this.commandes);
@@ -110,7 +110,7 @@ export class GerercommandeService {
             'Content-Type':  'application/json'
           })
         };
-          x= this._http.get<commande[]>('http://127.0.0.1:8000/api/apayer',httpOptions).subscribe((u)=>{
+          x= this._http.get<commande[]>('http://restaurant.edl/api/apayer',httpOptions).subscribe((u)=>{
             this.commandesapyer=u;
            // this.checkchanges();
             //console.log(this.commandes);
@@ -136,7 +136,7 @@ export class GerercommandeService {
       let data = {
         "serveur":sessionStorage.getItem('user')
       }
-        x= this._http.post<commande[]>('http://127.0.0.1:8000/api/comaservir',data,httpOptions).subscribe((u)=>{
+        x= this._http.post<commande[]>('http://restaurant.edl/api/comaservir',data,httpOptions).subscribe((u)=>{
           this.comaservir=u;
          // this.checkchanges();
           //console.log(this.commandes);
@@ -162,7 +162,7 @@ export class GerercommandeService {
         let data ={
           "id":id
         };
-        x= this._http.post<boolean>('http://127.0.0.1:8000/api/validateur',data,httpOptions);
+        x= this._http.post<boolean>('http://restaurant.edl/api/validateur',data,httpOptions);
         this.avalider().then(   ()=>     resolve());
         resolve();
 
@@ -181,7 +181,7 @@ export class GerercommandeService {
         let data ={
           "id":id
         };
-        x= this._http.post<boolean>('http://127.0.0.1:8000/api/annulercom',data,httpOptions);
+        x= this._http.post<boolean>('http://restaurant.edl/api/annulercom',data,httpOptions);
         this.avalider().then(   ()=>     resolve())
         resolve();
     })
@@ -199,7 +199,7 @@ export class GerercommandeService {
         let data ={
           "id":id
         };
-        x= this._http.post<boolean>('http://127.0.0.1:8000/api/prete',data,httpOptions);
+        x= this._http.post<boolean>('http://restaurant.edl/api/prete',data,httpOptions);
         this.avalider().then(   ()=>     resolve())
 
         resolve();
@@ -218,7 +218,7 @@ export class GerercommandeService {
         let data ={
           "id":id
         };
-        x= this._http.post<boolean>('http://127.0.0.1:8000/api/payer',data,httpOptions);
+        x= this._http.post<boolean>('http://restaurant.edl/api/payer',data,httpOptions);
         this.apayer().then(   ()=>     resolve())
 
         resolve();
@@ -238,7 +238,7 @@ export class GerercommandeService {
         let data ={
           "id":id
         };
-        x= this._http.post<boolean>('http://127.0.0.1:8000/api/retirercom',data,httpOptions);
+        x= this._http.post<boolean>('http://restaurant.edl/api/retirercom',data,httpOptions);
         this.aservir().then(   ()=>     resolve())
 
         resolve();
@@ -255,7 +255,7 @@ export class GerercommandeService {
           'Content-Type':  'application/json'
       })
     };
-    this._http.get<Date>('http://127.0.0.1:8000/api/lastupdate',httpOptions).subscribe((u)=>{
+    this._http.get<Date>('http://restaurant.edl/api/lastupdate',httpOptions).subscribe((u)=>{
       GerercommandeService.dernieredate=GerercommandeService.datechange;
       GerercommandeService.datechange=u;
 

@@ -11,6 +11,9 @@ import { Router } from '@angular/router';
 export class GerercompteComponent implements OnInit {
   suppForm :FormGroup;
   modifierForm :FormGroup;
+  errorMessage1;
+  errorMessage2;
+
   constructor(private formBuilder: FormBuilder,private gerercompte : AjoutcompteService,
     private router: Router) { }
 
@@ -30,7 +33,7 @@ export class GerercompteComponent implements OnInit {
     });
   }
 
-  onSubmitmodif(modifierForm : NgForm) {
+  onSubmitmodif() {
     const username = this.modifierForm.get('username').value;
     const password = this.modifierForm.get('password').value;
     this.gerercompte.modifiermdp(username,password).then((u)=>{
@@ -45,7 +48,7 @@ export class GerercompteComponent implements OnInit {
     })
 
   }
-  onSubmitsupp(suppForm : NgForm){
+  onSubmitsupp(){
     const username = this.suppForm.get('username2').value;
 
     this.gerercompte.suppcompte(username).then((u)=>{

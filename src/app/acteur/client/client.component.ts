@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./client.component.css']
 })
 export class ClientComponent implements OnInit {
-
+  errorMessage;
   constructor(private gerercommande : GerercommandeService,private router:Router) { }
 
   ngOnInit() {

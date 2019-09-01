@@ -16,7 +16,7 @@ export class AjoutcompteService {
         'Content-Type':  'application/json'
       })
     };
-      return this._http.post<boolean>('http://127.0.0.1:8000/api/inscription',User,httpOptions);
+      return this._http.post<boolean>('http://restaurant.edl/api/inscription',User,httpOptions);
    }
 
 
@@ -31,7 +31,7 @@ export class AjoutcompteService {
       "newpass":password
     }
       return new Promise((resolve)=>{
-        this._http.post<boolean>('http://127.0.0.1:8000/api/changepass',data,httpOptions)
+        this._http.post<boolean>('http://restaurant.edl/api/changepass',data,httpOptions)
         .subscribe((u)=>{
             resolve(u);
         });
@@ -49,7 +49,7 @@ export class AjoutcompteService {
 
     }
       return new Promise((resolve)=>{
-        this._http.post<boolean>('http://127.0.0.1:8000/api/suppuser',data,httpOptions)
+        this._http.post<boolean>('http://restaurant.edl/api/suppuser',data,httpOptions)
         .subscribe((u)=>{
             resolve(u);
         });

@@ -42,7 +42,7 @@ export class AjoutCompteComponent implements OnInit {
 
     });
 }
-onSubmit(userForm : NgForm){
+onSubmit(){
   let p1=this.userForm.get('password').value;
   let p2=this.userForm.get('password2').value;
 
