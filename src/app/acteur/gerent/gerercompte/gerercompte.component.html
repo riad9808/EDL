@@ -79,3 +79,81 @@
           </mat-card>
         </div>
         </div>
+
+
+        <div class="row">
+        <div class="col-sm-3 col-sm-offset-2  " style="margin : 10px ;align-self: center;"></div>
+        <div class="col-sm-6 col-md-12 col-sm-offset-2  " style="margin : 10px ">
+        <mat-card class="example-card" style="margin : 10px">
+            <mat-card-header>
+
+              <mat-card-title>liste des clients</mat-card-title>
+
+            </mat-card-header>
+
+            <mat-card-content>
+              <mat-accordion>
+
+
+
+
+
+                  <app-user
+
+                    *ngFor="let user of clients; let i = index"
+
+                      [username]="user.username"
+                      [fullname]="user.fullname"
+                      [telephone]="user.telephone"
+                      [type]="user.type"
+                      [date]="user.created_at"
+
+
+
+                    ></app-user>
+
+
+              </mat-accordion>
+            </mat-card-content>
+          </mat-card>
+        </div>
+        </div>
+
+      <div class="row">
+        <div class="col-sm-3  col-sm-offset-2  " style="margin : 10px ;align-self: center;"></div>
+        <div class="col-sm-6 col-md-12 col-sm-offset-2  " style="margin : 10px ">
+        <mat-card class="example-card" style="margin : 10px">
+            <mat-card-header>
+
+              <mat-card-title>liste des employées</mat-card-title>
+
+            </mat-card-header>
+
+            <mat-card-content>
+              <mat-accordion>
+
+
+
+
+
+                  <app-user
+
+                  *ngFor="let user of employees; let i = index"
+
+                    [username]="user.username"
+                    [fullname]="user.fullname"
+                    [telephone]="user.telephone"
+                    [type]="user.type"
+                    [date]="user.created_at"
+
+
+
+                   ></app-user>
+
+
+              </mat-accordion>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+

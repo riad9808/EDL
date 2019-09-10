@@ -42,7 +42,7 @@ export class AuthService {
         'Content-Type':  'application/json'
       })
     };
-      return this._http.post<string>('http://restaurant.edl/api/signin',u,httpOptions);
+      return this._http.post<string>('/api/signin',u,httpOptions);
 
      //this.typeSubject.next("gerent");
      // localStorage.setItem('userType',UserType.serveur.toString());

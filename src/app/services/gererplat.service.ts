@@ -47,7 +47,7 @@ getplat(){
   };
 
   return new Promise((resolve)=>{
-    this._http.get<produit[]>('http://restaurant.edl/api/produit',httpOptions).subscribe((data)=>{
+    this._http.get<produit[]>('/api/produit',httpOptions).subscribe((data)=>{
       this.produits=data;
       /*let a=data;
       let b:produit[]=[];
@@ -81,7 +81,7 @@ approvisionner(id,addedqte){
       "id":id,
       "addedqte":addedqte
     };
-     this._http.post<boolean>('http://restaurant.edl/api/approvisionner',col,httpOptions).subscribe((data)=>{
+     this._http.post<boolean>('/api/approvisionner',col,httpOptions).subscribe((data)=>{
       x=data;
     });
     this.getplat();
@@ -104,7 +104,7 @@ supprimer(id){
       "id":id
 
     };
-    x= this._http.post<boolean>('http://restaurant.edl/api/delete',col,httpOptions);
+    x= this._http.post<boolean>('/api/delete',col,httpOptions);
     this.getplat();
     resolve();
 });
@@ -118,7 +118,7 @@ ajoutproduit(pr):Observable<boolean>{
       'Content-Type':  'application/json'
     })
   };
-    return this._http.post<boolean>('http://restaurant.edl/api/addplat',pr,httpOptions);
+    return this._http.post<boolean>('/api/addplat',pr,httpOptions);
  }
 }
 

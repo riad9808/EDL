@@ -1,9 +1,26 @@
+<h6 style=" margin-left: 40px">adresse</h6>
+<form [formGroup]="commandeForm" (ngSubmit)="onSubmit()">
+<div class="form-group">
+    <mat-form-field  style="width: 90%; margin-left: 40px">
+      <mat-label>entrez l'adresse de la livraison de votre commande</mat-label>
+
+        <input matInput placeholder="adresse"
+        id="num"
+        type="text"
+        formControlName="adresse">
 
 
-        <button mat-raised-button color="primary" style="margin-left: 37%;margin-bottom:10px;width:250px"
+      </mat-form-field>
+</div>
+
+
+        <button mat-raised-button color="primary"  style="margin-left: 37% ;margin-bottom:10px;width:250px"
         type="submit"
-        (click)="nouvellecommande()">nouvelle commande</button>
+        [disabled]="commandeForm.invalid" >nouvelle commande</button>
 
+
+
+</form>
 
 
 

@@ -32,7 +32,7 @@ commandeForm;
     });
 }
 onSubmit(){
-    this.gerercommande.createcommande(
+    this.gerercommande.createcommandeserveur(
       sessionStorage.getItem('user'),
       this.commandeForm.get('num_table').value);
 

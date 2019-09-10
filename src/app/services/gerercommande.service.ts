@@ -10,18 +10,23 @@ import { resolve, reject } from 'q';
 })
 export class GerercommandeService {
   static c: commande;
-  //possiblesub:Subject<boolean>;
+
   possible=false;
   commandes:commande[];
   commandesapyer:commande[];
   comaservir:commande[];
-  private comaservirsub=new BehaviorSubject(undefined);
+  historiquecom:commande[];
 
+  private comaservirsub=new BehaviorSubject(undefined);
   private comapyer=new BehaviorSubject(undefined);
   private comsub=new BehaviorSubject(undefined);
+  private comshistorique=new BehaviorSubject(undefined);
+
   publishcom=this.comsub.asObservable();
   publishcomapyer=this.comapyer.asObservable();
   publishcomaserv =this.comaservirsub.asObservable();
+  publishcomahistorique =this.comshistorique.asObservable();
+
  // commandesSubject:Subject<commande[]>= new Subject<commande[]>();
   commandesemit(){
     this.comsub.next(this.commandes);
@@ -32,11 +37,19 @@ export class GerercommandeService {
   commandesaserviremit(){
     this.comaservirsub.next(this.comaservir);
   }
+  commandehistoriqueemit(){
+    this.comshistorique.next(this.historiquecom);
+  }
   constructor(private _http:HttpClient) {
 
    }
-  createcommande(a,b){
-    GerercommandeService.c=new commande(a,b);
+  createcommandeserveur(a,b){
+    GerercommandeService.c=new commande(a,b,'');
+    console.log(GerercommandeService.c);
+    this.possible=true;
+  }
+  createcommandeclient(a,b){
+    GerercommandeService.c=new commande(a,0,b);
     console.log(GerercommandeService.c);
     this.possible=true;
   }
@@ -67,7 +80,7 @@ export class GerercommandeService {
                 'Content-Type':  'application/json'
               })
             };
-               this._http.post<any>('http://restaurant.edl/api/commander',GerercommandeService.c,httpOptions).subscribe((u)=>{
+               this._http.post<any>('/api/commander',GerercommandeService.c,httpOptions).subscribe((u)=>{
                 this.possible=false;
 
 
@@ -91,7 +104,7 @@ export class GerercommandeService {
           'Content-Type':  'application/json'
         })
       };
-        x= this._http.get<commande[]>('http://restaurant.edl/api/comavalider',httpOptions).subscribe((u)=>{
+        x= this._http.get<commande[]>('/api/comavalider',httpOptions).subscribe((u)=>{
           this.commandes=u;
           //this.checkchanges();
           //console.log(this.commandes);
@@ -110,7 +123,7 @@ export class GerercommandeService {
             'Content-Type':  'application/json'
           })
         };
-          x= this._http.get<commande[]>('http://restaurant.edl/api/apayer',httpOptions).subscribe((u)=>{
+          x= this._http.get<commande[]>('/api/apayer',httpOptions).subscribe((u)=>{
             this.commandesapyer=u;
            // this.checkchanges();
             //console.log(this.commandes);
@@ -136,7 +149,7 @@ export class GerercommandeService {
       let data = {
         "serveur":sessionStorage.getItem('user')
       }
-        x= this._http.post<commande[]>('http://restaurant.edl/api/comaservir',data,httpOptions).subscribe((u)=>{
+        x= this._http.post<commande[]>('/api/comaservir',data,httpOptions).subscribe((u)=>{
           this.comaservir=u;
          // this.checkchanges();
           //console.log(this.commandes);
@@ -146,14 +159,34 @@ export class GerercommandeService {
 
         resolve();
     })
+}
+historiquecoms(){
+  let x
+  return new Promise((resolve)=>{
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+      })
+    };
+
+      x= this._http.get<commande[]>('/api/historique',httpOptions).subscribe((u)=>{
+        this.historiquecom=u;
+       // this.checkchanges();
+        //console.log(this.commandes);
+        this.commandehistoriqueemit();
+      });
+
+
+      resolve();
+  })
 
 
 
 }
-  cuisiniervalidate(id):Observable<boolean> {
+  cuisiniervalidate(id) {
     let x
     console.log(id);
-    let a=new Promise((resolve)=>{
+    return new Promise((resolve)=>{
       const httpOptions = {
         headers: new HttpHeaders({
           'Content-Type':  'application/json'
@@ -162,9 +195,12 @@ export class GerercommandeService {
         let data ={
           "id":id
         };
-        x= this._http.post<boolean>('http://restaurant.edl/api/validateur',data,httpOptions);
-        this.avalider().then(   ()=>     resolve());
-        resolve();
+        x= this._http.post<boolean>('/api/validateur',data,httpOptions).subscribe((u)=>{
+          this.avalider().then(   ()=>     resolve(u));
+          resolve(u);
+        })
+
+
 
     })
     return x;
@@ -181,7 +217,7 @@ export class GerercommandeService {
         let data ={
           "id":id
         };
-        x= this._http.post<boolean>('http://restaurant.edl/api/annulercom',data,httpOptions);
+        x= this._http.post<boolean>('/api/annulercom',data,httpOptions);
         this.avalider().then(   ()=>     resolve())
         resolve();
     })
@@ -199,7 +235,7 @@ export class GerercommandeService {
         let data ={
           "id":id
         };
-        x= this._http.post<boolean>('http://restaurant.edl/api/prete',data,httpOptions);
+        x= this._http.post<boolean>('/api/prete',data,httpOptions);
         this.avalider().then(   ()=>     resolve())
 
         resolve();
@@ -218,7 +254,7 @@ export class GerercommandeService {
         let data ={
           "id":id
         };
-        x= this._http.post<boolean>('http://restaurant.edl/api/payer',data,httpOptions);
+        x= this._http.post<boolean>('/api/payer',data,httpOptions);
         this.apayer().then(   ()=>     resolve())
 
         resolve();
@@ -238,7 +274,7 @@ export class GerercommandeService {
         let data ={
           "id":id
         };
-        x= this._http.post<boolean>('http://restaurant.edl/api/retirercom',data,httpOptions);
+        x= this._http.post<boolean>('/api/retirercom',data,httpOptions);
         this.aservir().then(   ()=>     resolve())
 
         resolve();
@@ -255,28 +291,37 @@ export class GerercommandeService {
           'Content-Type':  'application/json'
       })
     };
-    this._http.get<Date>('http://restaurant.edl/api/lastupdate',httpOptions).subscribe((u)=>{
-      GerercommandeService.dernieredate=GerercommandeService.datechange;
-      GerercommandeService.datechange=u;
 
-    });
-    console.log('changer '+GerercommandeService.datechange);
-    if(GerercommandeService.dernieredate<GerercommandeService.datechange){
 
       let a= new Promise((resolve)=>{
 
-         this.aservir().then();
+        this._http.get<Date>('/api/lastupdate',httpOptions).subscribe((u)=>{
+          GerercommandeService.dernieredate=GerercommandeService.datechange;
+          GerercommandeService.datechange=u;
+          resolve();
+        });
+
+      }).then(()=>{
+        console.log('changer '+GerercommandeService.datechange);
+        if(GerercommandeService.dernieredate<GerercommandeService.datechange){
+
+        this.aservir().then();
         this.apayer().then();
         this.avalider().then();
-
+        resolve();
+      } else{
+          resolve();
+        }
+      })
+      .then(()=>{
         resolve();
       })
-      a.then(()=>{
+      /*a.then(()=>{
         resolve();
-      })
+      })*/
 
-    }
-    resolve();
+
+
     });
   }
 

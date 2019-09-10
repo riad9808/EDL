@@ -18,6 +18,7 @@ export class CommandeComponent implements OnInit {
   @Input() id;
   @Input() valide;
   //idd=this.a.commande.id;
+  @Input() adresse ;
   @Input() numtable;
   @Input() souscom;
   @Input() serveur;
@@ -35,8 +36,11 @@ export class CommandeComponent implements OnInit {
   }
 
   valider(){
-    this.gerercom.cuisiniervalidate(this.id).subscribe((u)=>{
-      console.log(u);
+    this.gerercom.cuisiniervalidate(this.id).then((u)=>{
+      if(!u){
+        alert('stock insufisant veuillez annuler cette commande');
+
+      }
     })
     this.gerercom.avalider().then(()=>{
       this.gerercom.commandesemit();

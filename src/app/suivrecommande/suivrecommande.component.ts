@@ -26,11 +26,12 @@ export class SuivrecommandeComponent implements OnInit,OnDestroy {
           });
       console.log(this.lescoms);
     });
+
     setInterval(()=>{
       this.gerercom.checkchanges().then()
-    }, 10000)
+    }, 2000)
   }
   ngOnDestroy(): void {
-    this.comamandesSubscription.unsubscribe()
+    //this.comamandesSubscription.unsubscribe()
   }
 }

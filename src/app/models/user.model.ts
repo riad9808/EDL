@@ -10,13 +10,14 @@ export class user{
     fullname;
     telephone;
     password;
-    
+    datecreation;
+
 
     type :any;
-    
-    
+
+
     constructor(username,fullname,telephone,password,type){
-        
+
         this.username=username;
         this.fullname=fullname;
 

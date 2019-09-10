@@ -1,27 +1,40 @@
 import { Component, OnInit } from '@angular/core';
 import { GerercommandeService } from 'src/app/services/gerercommande.service';
 import { Router } from '@angular/router';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-client',
   templateUrl: './client.component.html',
   styleUrls: ['./client.component.css']
 })
+
 export class ClientComponent implements OnInit {
+  commandeForm;
   errorMessage;
-  constructor(private gerercommande : GerercommandeService,private router:Router) { }
+  constructor(private gerercommande : GerercommandeService,
+    private formBuilder: FormBuilder,private router:Router) { }
 
   ngOnInit() {
     /*
     setInterval(()=>{
       this.gerercommande.checkchanges().then()
-    }, 50000)*/
+    }, 5000)*/
+    this.initForm();
+    //this.gerercommande.possiblesub.next(this.commandeForm.in)
   }
-  nouvellecommande(){
+  initForm() {
+    this.commandeForm = this.formBuilder.group({
+      adresse: ['', Validators.required],
+
+
+    });
+}
+onSubmit(){
     this.gerercommande.possible=true;
-    this.gerercommande.createcommande(
+    this.gerercommande.createcommandeclient(
       sessionStorage.getItem('user'),
-      0);
+      this.commandeForm.get('adresse').value);
   }
   possible(){
 
@@ -29,7 +42,7 @@ export class ClientComponent implements OnInit {
 
   }
   valider(){
-
+    this.gerercommande.possible=false;
       this.gerercommande.valider().then((res)=>{
 
         alert('succes');

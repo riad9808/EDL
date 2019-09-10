@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
 import { AjoutcompteService } from 'src/app/services/ajoutcompte.service';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { user } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-gerercompte',
@@ -13,12 +15,30 @@ export class GerercompteComponent implements OnInit {
   modifierForm :FormGroup;
   errorMessage1;
   errorMessage2;
-
+  users:user[];
+  clients:user[];
+  employees:user[];
+  usersub:Subscription;
   constructor(private formBuilder: FormBuilder,private gerercompte : AjoutcompteService,
     private router: Router) { }
 
   ngOnInit() {
     this.initForm();
+    this.gerercompte.getusers().then(()=>{
+      this.usersub=this.gerercompte.published.subscribe((data:user[])=>{
+        this.users=data;
+        this.clients=[];
+        this.employees=[];
+        this.users.forEach(element => {
+          if(element.type==='client'){
+            this.clients.push(element);
+          }else{
+            this.employees.push(element);
+          }
+        });
+
+      })
+    });
 
   }
 

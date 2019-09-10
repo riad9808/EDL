@@ -49,6 +49,7 @@
   </mat-panel-description>
 </mat-expansion-panel-header>
   <p>commandé depuis {{date}}</p>
+  <div *ngIf="numtable==0"> adresse : {{adresse}} </div>
   <ul>
     <li *ngFor="let scom of souscom; let i = index">
       à servire {{scom.produit[0].categorie}} : {{scom.produit[0].extra}} &nbsp; quantité {{scom.qte}} -- prix unitaire {{scom.produit[0].prix}}

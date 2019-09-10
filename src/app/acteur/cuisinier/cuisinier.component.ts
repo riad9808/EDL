@@ -39,6 +39,6 @@ export class CuisinierComponent implements OnInit ,OnDestroy{
   }
 
   ngOnDestroy(): void {
-    this.comamandesSubscription.unsubscribe();
+  //  this.comamandesSubscription.unsubscribe();
   }
 }

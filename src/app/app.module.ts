@@ -36,6 +36,8 @@ import { GerercompteComponent } from './acteur/gerent/gerercompte/gerercompte.co
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatListModule} from '@angular/material/list';
 import { FourOhFourComponent } from './four-oh-four/four-oh-four.component';
+import { HistoriqueComponent } from './acteur/gerent/historique/historique.component';
+import { UserComponent } from './acteur/gerent/user/user.component';
 
 const appRoutes: Routes = [
 
@@ -45,6 +47,7 @@ const appRoutes: Routes = [
   { path: 'cuisinier', canActivate: [AuthguardService],component: CuisinierComponent },
   { path: 'client', canActivate: [AuthguardService],component: ClientComponent },
   { path: 'gerent/gerercompte', canActivate: [AuthguardService],component: GerercompteComponent },
+  { path: 'gerent/historique', canActivate: [AuthguardService],component: HistoriqueComponent },
 
   { path: 'suivrecom', canActivate: [AuthguardService],component: SuivrecommandeComponent },
 
@@ -76,7 +79,9 @@ const appRoutes: Routes = [
     CommandeComponent,
     SuivrecommandeComponent,
     GerercompteComponent,
-    FourOhFourComponent
+    FourOhFourComponent,
+    HistoriqueComponent,
+    UserComponent
   ],
   imports: [
     HttpClientModule,

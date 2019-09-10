@@ -76,7 +76,7 @@ lesboissons:produit[];
   ngOnDestroy(): void {
     this.authSubsscription.unsubscribe();
     this.typesubscription.unsubscribe();
-    this.mesproduitsubscription.unsubscribe()
+  //  this.mesproduitsubscription.unsubscribe()
   }
 
 }

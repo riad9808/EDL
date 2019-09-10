@@ -1,13 +1,22 @@
 import { Injectable } from '@angular/core';
 import { user } from '../models/user.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class AjoutcompteService {
+  users:user[];
+  private datasub = new BehaviorSubject(undefined);
+  published =this.datasub.asObservable();
+
+
+  emitusers(){
+
+    this.datasub.next(this.users);
+   }
   constructor(private _http:HttpClient) { }
 
    signup(User : user):Observable<boolean>{
@@ -16,7 +25,7 @@ export class AjoutcompteService {
         'Content-Type':  'application/json'
       })
     };
-      return this._http.post<boolean>('http://restaurant.edl/api/inscription',User,httpOptions);
+      return this._http.post<boolean>('/api/inscription',User,httpOptions);
    }
 
 
@@ -31,7 +40,7 @@ export class AjoutcompteService {
       "newpass":password
     }
       return new Promise((resolve)=>{
-        this._http.post<boolean>('http://restaurant.edl/api/changepass',data,httpOptions)
+        this._http.post<boolean>('/api/changepass',data,httpOptions)
         .subscribe((u)=>{
             resolve(u);
         });
@@ -49,13 +58,35 @@ export class AjoutcompteService {
 
     }
       return new Promise((resolve)=>{
-        this._http.post<boolean>('http://restaurant.edl/api/suppuser',data,httpOptions)
+        this._http.post<boolean>('/api/suppuser',data,httpOptions)
         .subscribe((u)=>{
             resolve(u);
         });
       });
 
    }
+
+   getusers(){
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+      })
+    };
+
+    return new Promise((resolve)=>{
+      this._http.get<user[]>('/api/listeuser',httpOptions).subscribe((data)=>{
+        this.users=data;
+
+        this.emitusers();
+        resolve();
+      });
+
+
+    });
+
+
+  }
 
 
 }

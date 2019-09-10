@@ -6,7 +6,7 @@
 <div class="container shadow-lg p-3 mb-5 bg-white rounded-lg"  >
   <nav class="navbar navbar-expand-lg navbar-light  justify-content-between "  >
 
-    <a class="navbar-brand " routerLink=""><b>Restautrant</b> {{ now | date:'medium'  }}</a>
+    <a class="navbar-brand " routerLink=""><b>FoodSafe</b> {{ now | date:'medium'  }}</a>
     <div class="collapse navbar-collapse container-fluid" id="navbarSupportedContent">
 
       <ul class="navbar-nav mr-auto">
@@ -30,12 +30,8 @@
         <li class="nav-item" >
           <a *ngIf="type==='caissier'" class="nav-link" mat-raised-button routerLink="caissier">encaissement</a>
         </li>
-        <!--
 
-          <li class="nav-item" >
-            <a *ngIf="type==='serveur'" class="nav-link" routerLink="caissier">encaissement</a>
-          </li>
-        -->
+
 
         <li class="nav-item" >
           <a *ngIf="type==='gerent'" class="nav-link"  mat-raised-button routerLink="gerent/ajoutproduit">ajouter un produit</a>
@@ -45,6 +41,9 @@
         </li>
         <li class="nav-item" >
             <a *ngIf="type==='gerent'" class="nav-link " mat-raised-button routerLink="gerent/gerercompte">gerer les comptes</a>
+          </li>
+          <li class="nav-item" >
+            <a *ngIf="type==='gerent'" class="nav-link" mat-raised-button routerLink="gerent/historique">historique</a>
           </li>
 
       </ul>

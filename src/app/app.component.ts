@@ -10,7 +10,7 @@ import { AuthService } from './services/auth.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit , OnDestroy {
-
+  user='';
   ngOnDestroy(): void {
     this.authSubsscription.unsubscribe();
     this.typesubscription.unsubscribe();
@@ -29,6 +29,7 @@ export class AppComponent implements OnInit , OnDestroy {
       type ="local";
   ngOnInit() {
     this.now;
+
 
 
         setInterval(() => {
